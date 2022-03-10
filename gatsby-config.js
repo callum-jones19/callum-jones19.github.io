@@ -9,7 +9,7 @@ module.exports = {
     // Description that goes under your name in main bio
     description: ``,
     // Optional: Twitter account handle
-    // author: `@rfitzio`,
+    author: `@rfitzio`,
     // Optional: Github account URL
     github: `https://github.com/callum-jones19`,
     // Optional: LinkedIn account URL
@@ -35,41 +35,6 @@ module.exports = {
         description:
           'Designed game backend with a focus on strong OOP principles and programmatic design patterns. Received 96%.',
         link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-    ],
-    // Optional: List your experience, they must have `name` and `description`. `link` is optional.
-    experience: [
-      {
-        name: 'Acme Corp',
-        description: 'Full-Stack Developer, February 2020 - Present',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-      {
-        name: 'Globex Corp',
-        description: 'Full-Stack Developer, December 2017 - February 2020',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-      {
-        name: 'Hooli',
-        description: 'Full-Stack Developer, May 2015 - December 2017',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-    ],
-    // Optional: List your skills, they must have `name` and `description`.
-    skills: [
-      {
-        name: 'Languages & Frameworks',
-        description:
-          'JavaScript (ES6+), Golang, Node.js, Express.js, React, Ruby on Rails, PHP',
-      },
-      {
-        name: 'Databases',
-        description: 'MongoDB, PostreSQL, MySQL',
-      },
-      {
-        name: 'Other',
-        description:
-          'Docker, Amazon Web Services (AWS), CI / CD, Microservices, API design, Agile / Scrum',
       },
     ],
   },
