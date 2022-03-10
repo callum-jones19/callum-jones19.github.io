@@ -1,77 +1,77 @@
 module.exports = {
   siteMetadata: {
     // Site URL for when it goes live
-    siteUrl: `https://elastic-meninsky-aa7c74.netlify.app/`,
+    siteUrl: `https://callum-jones19.github.io/`,
     // Your Name
-    name: 'Ryan Fitzgerald',
+    name: 'Callum Jones',
     // Main Site Title
-    title: `Ryan Fitzgerald | Full-Stack Developer`,
+    title: `Callum Jones | SENG/LAWS Student @ UNSW`,
     // Description that goes under your name in main bio
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit, ipsum.`,
+    description: `Bachelor of Laws - LLB / Bacehlor of Engineering (Software) - BE (Hons)`,
     // Optional: Twitter account handle
-    author: `@rfitzio`,
+    // author: `@mark`,
     // Optional: Github account URL
-    github: `https://github.com/ryanfitzgerald`,
+    github: `https://github.com/callum-jones19`,
     // Optional: LinkedIn account URL
-    linkedin: `https://www.linkedin.com/in/ryanafitzgerald/`,
+    linkedin: `https://www.linkedin.com/in/callum-jones-4823a31aa/`,
     // Content of the About Me section
-    about: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus perferendis porro cumque ea error ab voluptatem. Temporibus adipisci exercitationem similique itaque quibusdam laudantium, qui molestiae quas, aut amet animi id.`,
+    about: `Distinction average (80 WAM), 4th year Software Engineering/Law student. I'm passionate about learning new skills and applying them to provide the best possible product for clients, and pushing myself to try things beyond what I am familiar with.`,
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
-        name: 'Devfolio',
+        name: 'COM6841 - FreeBSD Rootkit',
         description:
-          'A zero-config and blazing fast personal site + blog built with GatsbyJs and TailwindCSS',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+          'Researched and wrote an operational kernel-level rootkit for FreeBSD in C, meticulously documented entire research process, difficulties, and solutions. Received 100%.',
+        link: 'https://github.com/callum-jones19/COMP6841_SA',
       },
       {
-        name: 'ChromeExtensionKit',
+        name: 'COMP2511 - Java Dungeon Crawler',
         description:
-          'Kit to jump-start your Chrome extension projects with a variety of battle-tested starter templates',
-        link: 'https://chromeextensionkit.com/?ref=devfolio',
+          'Designed game backend with a focus on strong OOP principles and programmatic design patterns. Received 96%.',
+        link: 'https://github.com/callum-jones19',
       },
       {
-        name: 'Another Cool Project',
+        name: 'COMP1531 - Messaging Service Backend',
         description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit ducimus perferendis',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
+          ' Coded complete Python backend with a focus on DRY principles, encapsulation, and minimisation of design smells. Placed 12th on Honour Role',
+        link: 'https://github.com/callum-jones19',
       },
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
-    experience: [
-      {
-        name: 'Acme Corp',
-        description: 'Full-Stack Developer, February 2020 - Present',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-      {
-        name: 'Globex Corp',
-        description: 'Full-Stack Developer, December 2017 - February 2020',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-      {
-        name: 'Hooli',
-        description: 'Full-Stack Developer, May 2015 - December 2017',
-        link: 'https://github.com/RyanFitzgerald/devfolio',
-      },
-    ],
-    // Optional: List your skills, they must have `name` and `description`.
-    skills: [
-      {
-        name: 'Languages & Frameworks',
-        description:
-          'JavaScript (ES6+), Golang, Node.js, Express.js, React, Ruby on Rails, PHP',
-      },
-      {
-        name: 'Databases',
-        description: 'MongoDB, PostreSQL, MySQL',
-      },
-      {
-        name: 'Other',
-        description:
-          'Docker, Amazon Web Services (AWS), CI / CD, Microservices, API design, Agile / Scrum',
-      },
-    ],
+    // experience: [
+    //   {
+    //     name: 'Acme Corp',
+    //     description: 'Full-Stack Developer, February 2020 - Present',
+    //     link: 'https://github.com/RyanFitzgerald/devfolio',
+    //   },
+    //   {
+    //     name: 'Globex Corp',
+    //     description: 'Full-Stack Developer, December 2017 - February 2020',
+    //     link: 'https://github.com/RyanFitzgerald/devfolio',
+    //   },
+    //   {
+    //     name: 'Hooli',
+    //     description: 'Full-Stack Developer, May 2015 - December 2017',
+    //     link: 'https://github.com/RyanFitzgerald/devfolio',
+    //   },
+    // ],
+    // // Optional: List your skills, they must have `name` and `description`.
+    // skills: [
+    //   {
+    //     name: 'Languages & Frameworks',
+    //     description:
+    //       'JavaScript (ES6+), Golang, Node.js, Express.js, React, Ruby on Rails, PHP',
+    //   },
+    //   {
+    //     name: 'Databases',
+    //     description: 'MongoDB, PostreSQL, MySQL',
+    //   },
+    //   {
+    //     name: 'Other',
+    //     description:
+    //       'Docker, Amazon Web Services (AWS), CI / CD, Microservices, API design, Agile / Scrum',
+    //   },
+    // ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
