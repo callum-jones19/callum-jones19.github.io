@@ -1,9 +1,6 @@
 {
-  "name": "devfolio",
-  "private": true,
-  "description": "A modern and production-ready personal portfolio + blog template built with GatsbyJs and TailwindCSS",
+  "name": "cj-portfolio",
   "version": "0.1.0",
-  "author": "Ryan Fitzgerald",
   "homepage": "https://callum-jones19.github.io",
   "dependencies": {
     "gatsby": "^2.32.13",
@@ -53,9 +50,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RyanFitzgerald/devfolio"
-  },
-  "bugs": {
-    "url": "https://github.com/RyanFitzgerald/devfolio/issues"
+    "url": "https://github.com/callum-jones19/callum-jones19.github.io"
   }
 }

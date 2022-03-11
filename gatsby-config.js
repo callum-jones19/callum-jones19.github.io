@@ -28,13 +28,13 @@ module.exports = {
         name: 'COMP2511 - Java Dungeon Crawler',
         description:
           'Designed game backend with a focus on strong OOP principles and programmatic design patterns. Received 96%.',
-        link: 'https://github.com/callum-jones19',
+        link: 'https://github.com/callum-jones19/comp2511-dungeon-crawler',
       },
       {
         name: 'COMP1531 - Messaging Service Backend',
         description:
-          ' Coded complete Python backend with a focus on DRY principles, encapsulation, and minimisation of design smells. Placed 12th on Honour Role',
-        link: 'https://github.com/callum-jones19',
+          'Coded complete Python backend with a focus on DRY principles, encapsulation, and minimisation of design smells. Placed 12th on Honour Role',
+        link: 'https://github.com/callum-jones19/cs1531-messenger-backend',
       },
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
