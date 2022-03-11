@@ -7,7 +7,7 @@ module.exports = {
     // Main Site Title
     title: `Callum Jones | SENG/LAWS Student @ UNSW`,
     // Description that goes under your name in main bio
-    description: `Bachelor of Laws - LLB / Bacehlor of Engineering (Software) - BE (Hons)`,
+    description: `Bachelor of Laws - LLB / Bachelor of Engineering (Software) - BE (Hons)`,
     // Optional: Twitter account handle
     // author: `@mark`,
     // Optional: Github account URL
@@ -19,7 +19,7 @@ module.exports = {
     // Optional: List your projects, they must have `name` and `description`. `link` is optional.
     projects: [
       {
-        name: 'COM6841 - FreeBSD Rootkit',
+        name: 'COMP6841 - FreeBSD Rootkit',
         description:
           'Researched and wrote an operational kernel-level rootkit for FreeBSD in C, meticulously documented entire research process, difficulties, and solutions. Received 100%.',
         link: 'https://github.com/callum-jones19/COMP6841_SA',
@@ -37,41 +37,6 @@ module.exports = {
         link: 'https://github.com/callum-jones19/cs1531-messenger-backend',
       },
     ],
-    // Optional: List your experience, they must have `name` and `description`. `link` is optional.
-    // experience: [
-    //   {
-    //     name: 'Acme Corp',
-    //     description: 'Full-Stack Developer, February 2020 - Present',
-    //     link: 'https://github.com/RyanFitzgerald/devfolio',
-    //   },
-    //   {
-    //     name: 'Globex Corp',
-    //     description: 'Full-Stack Developer, December 2017 - February 2020',
-    //     link: 'https://github.com/RyanFitzgerald/devfolio',
-    //   },
-    //   {
-    //     name: 'Hooli',
-    //     description: 'Full-Stack Developer, May 2015 - December 2017',
-    //     link: 'https://github.com/RyanFitzgerald/devfolio',
-    //   },
-    // ],
-    // // Optional: List your skills, they must have `name` and `description`.
-    // skills: [
-    //   {
-    //     name: 'Languages & Frameworks',
-    //     description:
-    //       'JavaScript (ES6+), Golang, Node.js, Express.js, React, Ruby on Rails, PHP',
-    //   },
-    //   {
-    //     name: 'Databases',
-    //     description: 'MongoDB, PostreSQL, MySQL',
-    //   },
-    //   {
-    //     name: 'Other',
-    //     description:
-    //       'Docker, Amazon Web Services (AWS), CI / CD, Microservices, API design, Agile / Scrum',
-    //   },
-    // ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
