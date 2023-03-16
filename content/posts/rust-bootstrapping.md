@@ -69,11 +69,12 @@ The last question I found myself asking about this was, simply put: *why?* Why g
 
 
 # References
-RustCon Presentation  2020: https://docs.google.com/presentation/d/1GnKlK98APzZ0Fw1BOqbroPQyvIio5Tm7SP7P0B8x3Cc/edit#slide=id.g13ff117d326_0_49
-https://users.rust-lang.org/t/understanding-how-the-rust-compiler-is-built/87237
-https://github.com/rust-lang/rust/tree/master/src
-https://guix.gnu.org/blog/2018/bootstrapping-rust/
-https://hackernoon.com/building-your-own-programming-language-from-scratchhttps://bas.codes/posts/create-a-programming-language
+
+- RustCon Presentation  2020: https://docs.google.com/presentation/d/1GnKlK98APzZ0Fw1BOqbroPQyvIio5Tm7SP7P0B8x3Cc/edit#slide=id.g13ff117d326_0_49
+- https://users.rust-lang.org/t/understanding-how-the-rust-compiler-is-built/87237
+- https://github.com/rust-lang/rust/tree/master/src
+- https://guix.gnu.org/blog/2018/bootstrapping-rust/
+- https://hackernoon.com/building-your-own-programming-language-from-scratchhttps://bas.codes/posts/create-a-programming-language
 
 
 [^1]: https://en.wikipedia.org/wiki/OCaml
