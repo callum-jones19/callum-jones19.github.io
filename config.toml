@@ -1,0 +1,17 @@
+baseURL = 'https://callum-jones19.github.io/'
+languageCode = 'en-us'
+title = 'Callum Jones'
+theme = 'PaperMod'
+
+[params.homeInfoParams]
+title = "Callum Jones"
+Content = "Hello there 👋! Welcome to my homepage. Here, you can find all of my blog posts, as well as a list of all the major projects I have worked on!"
+imageUrL = "https://avatars.githubusercontent.com/u/13027963?v=4"
+
+[[params.buttons]]
+name = "Posts"
+url = "/posts"
+
+[[params.socialIcons]]
+name = "Github"
+url = "https://github.com/callum-jones19/"
