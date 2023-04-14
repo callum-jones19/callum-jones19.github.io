@@ -41,4 +41,30 @@ What this means is that, in reality, very few people take it.
 
 # Documentation From the Beginning
 
-This is where Rust takes a different stance. Lik
+This is where Rust takes a different stance. Like many of the other features that 
+it implements, Rust builds documentation into its tooling set as a first-class citizen.
+In a similar way to how tools like rust-analyzer encourage well formatted code as you 
+go, Rust's built in documentation tools try to reduce as much friction as possible 
+between you writing explanations of what your code does, and having this code 
+easily publishable to anyone who chooses to use your library. 
+
+This lack of friction is paramount. By reducing as much effort as possible for the user,
+Rust is actively encouraging its community to take part in this best practice. Unlike
+languages like Python, where docs are manually written separately to the code itself,
+the Rust documentation system allows function docstrings to take a dual purpose: 
+your code becomes more readable to yourself and maintainers, as it would for Python 
+docstrings, but at the same time the in-built tooling allows you to make this 
+readily accessible to any third-party wanting to use your library as well.
+
+Rust goes a step further and supercharges the docstring functionality. By adding
+embeddable examples, etc, Rust encourages code maintainers to go above and beyond.
+It is so easy to add these things that you might as well do it, because for minimal 
+effort on your part, your crate suddenly becomes substantially more accessible to a much wider
+range of people. Additionally, because it is so easy, a lot of the community does it.
+This has a domino effect, where other code maintainers and writers will be more 
+encouraged to do the same themselves.
+
+Once again, Rust gives us an excellent example of how with a small amount of tooling 
+integrated into the core language, the user experience of a language can become 
+vastly better. Small changes to reduce user-end and developer friction can only
+help to improve the open source community and help to bring better software to all of us.
