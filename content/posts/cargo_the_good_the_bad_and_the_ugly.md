@@ -4,7 +4,6 @@ date: 2023-04-14
 draft: false
 
 showReadingTime: true
-showToc: true
 ---
 
 # Introduction
