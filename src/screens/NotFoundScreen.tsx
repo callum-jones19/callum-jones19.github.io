@@ -1,4 +1,3 @@
-import './tmp.css';
 import { NavLink } from "react-router";
 
 export default function NotFoundScreen() {
