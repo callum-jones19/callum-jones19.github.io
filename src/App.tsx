@@ -12,8 +12,8 @@ export default function App() {
           <Route path="/" element={<MainScreen />}>
             <Route index element={<HomeScreen />} />
             <Route path="projects" element={<ProjectScreen />} />
+            <Route path="*" element={<NotFoundScreen />} />
           </Route>
-          <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
     </>

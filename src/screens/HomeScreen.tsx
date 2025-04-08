@@ -1,3 +1,4 @@
+import { GitHub } from 'react-feather';
 import pfp from '../assets/pfp.jpg';
 
 export default function HomeScreen() {
@@ -25,10 +26,9 @@ export default function HomeScreen() {
         <h2 className="font-semibold text-2xl mb-2">Links</h2>
         <ul role='list' className='list-disc marker:text-red-300 ml-3'>
           <li>
-            <a href='https://github.com/callum-jones19/' className='underline text-red-400'>Github</a>
-          </li>
-          <li>
-            <a href='https://github.com/callum-jones19/' className='underline text-red-400'>Github</a>
+            <a href='https://github.com/callum-jones19/' className='underline text-red-400 flex items-center gap-1'>
+              Github
+            </a>
           </li>
         </ul>
       </div>
