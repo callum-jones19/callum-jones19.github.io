@@ -1,4 +1,3 @@
-import { GitHub } from 'react-feather';
 import pfp from '../assets/pfp.jpg';
 
 export default function HomeScreen() {
