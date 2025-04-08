@@ -1,7 +1,7 @@
 export default function ProjectScreen() {
   return (
     <>
-      <p>Under construction...</p>
+      <p className="text-center">Under construction...</p>
     </>
   );
 }
