@@ -3,15 +3,15 @@ import { ExternalLink } from "react-feather";
 export default function CoraliaSection() {
   return (
     <>
-      <div>
+      <div className="border-b border-solid border-red-300 mb-4 pb-4">
         <a
           href="https://github.com/callum-jones19/coralia"
-          className="font-semibold text-2xl underline text-red-400 flex items-center gap-1"
+          className="font-semibold text-2xl underline text-red-950 dark:text-red-400 flex items-center gap-1 sticky top-0 bg-neutral-50 dark:bg-neutral-900 backdrop-blur-2xl py-2"
         >
           Coralia
           <ExternalLink className="text-" />
         </a>
-        <p className="mt-2">
+        <p className="">
           Coralia is a cross-platform, local music player. It is powered by
           a <span className="text-amber-400 font-bold">Rust</span> backend that is controlled
           via a <span className="text-amber-400 font-bold">Typescript</span> frontend. The frontend stays in sync with the backend
@@ -24,7 +24,7 @@ export default function CoraliaSection() {
         <p className="mt-2 font-bold">
           Tech Stack:
         </p>
-        <ul role='list' className='list-disc marker:text-red-400 ml-8 mt-2'>
+        <ul role='list' className='list-disc marker:text-red-900 marker:dark:text-red-400 ml-8 mt-2'>
           <li>React</li>
           <li>Tauri</li>
           <li>Tailwind CSS</li>
@@ -32,7 +32,7 @@ export default function CoraliaSection() {
         <p className="mt-2 font-bold">
           Relevant Knowledge:
         </p>
-        <ul role='list' className='list-disc marker:text-red-400 ml-8 mt-2'>
+        <ul role='list' className='list-disc marker:text-red-900 marker:dark:text-red-400 ml-8 mt-2'>
           <li className="mb-2">
             <b>Multithreading:</b> The Rust audio player relies heavily on multithreading to handle playback
             itself, and playback event management. All custom Tauri API endpoints
@@ -71,7 +71,6 @@ export default function CoraliaSection() {
             * 50px). An appropriate image size is then chosen situationally, to
             prevent the frontend performing excessive and demanding paints.
           </li>
-
         </ul>
       </div>
     </>
