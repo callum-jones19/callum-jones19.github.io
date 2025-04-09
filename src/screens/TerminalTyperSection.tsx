@@ -12,20 +12,17 @@ export default function TerminalTyperSection() {
           <ExternalLink className="text-" />
         </a>
         <p className="">
-          A TUI Monkeytype clone. This is just a simple little app that lets you
-
-        </p>
-        <p className="mt-2">
-          The frontend is written to be fully screen-size responsive and as intuitive
-          as possible.
+          A TUI Monkeytype clone written in <span className="text-amber-400 font-bold">Rust</span>. This is just a simple little app that lets you
+          do timed rounds where you are given a randomised prompt, and you have
+          to type it to completion as quickly as possible. The prompt fills
+          in with colour-coded characters to represent accuracy.
         </p>
         <p className="mt-2 font-bold">
           Tech Stack:
         </p>
         <ul role='list' className='list-disc marker:text-red-400 ml-8 mt-2'>
-          <li>React</li>
-          <li>Tauri</li>
-          <li>Tailwind CSS</li>
+          <li>Rust</li>
+          <li>Ratatui (TUI interface builder)</li>
         </ul>
       </div>
     </>
