@@ -1,4 +1,5 @@
 import CoraliaSection from "./CoraliaSection";
+import RootkitSection from "./RootkitSection";
 import TerminalTyperSection from "./TerminalTyperSection";
 
 export default function ProjectScreen() {
@@ -6,7 +7,7 @@ export default function ProjectScreen() {
     <>
       <div className="border-b border-red-300 mb-2 pb-4 relative">
         <h1
-          className="font-semibold text-3xl dark:text-red-400 text-red-950 flex items-center gap-1"
+          className="font-bold text-3xl flex items-center gap-1"
         >
           Projects
         </h1>
@@ -18,6 +19,7 @@ export default function ProjectScreen() {
       </div>
       <CoraliaSection />
       <TerminalTyperSection />
+      <RootkitSection />
     </>
   );
 }

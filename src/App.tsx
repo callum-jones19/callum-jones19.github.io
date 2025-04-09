@@ -6,7 +6,7 @@ import NotFoundScreen from "./screens/NotFoundScreen";
 
 export default function App() {
   return (
-    <>
+    <div className="text-lg">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainScreen />}>
@@ -16,6 +16,6 @@ export default function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ export default function CoraliaSection() {
       <div className="border-b border-solid border-red-300 mb-4 pb-4">
         <a
           href="https://github.com/callum-jones19/coralia"
-          className="font-semibold text-2xl underline text-red-950 dark:text-red-400 flex items-center gap-1 sticky top-0 bg-neutral-50 dark:bg-neutral-900 backdrop-blur-2xl py-2"
+          className="font-bold text-2xl underline flex items-center gap-1 sticky top-0 bg-neutral-50 dark:bg-neutral-900 backdrop-blur-2xl py-2"
         >
           Coralia
           <ExternalLink className="text-" />
