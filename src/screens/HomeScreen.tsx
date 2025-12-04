@@ -46,7 +46,7 @@ export default function HomeScreen() {
         <h2 className="font-bold text-2xl mb-2">Links</h2>
         <ul role='list' className='list-disc marker:text-red-300 ml-6'>
           <li>
-            <a href='https://github.com/callum-jones19/' className='underline text-red-900 flex items-center gap-1'>
+            <a href='https://github.com/callum-jones19/' className='underline dark:text-red-300 text-red-900 flex items-center gap-1'>
               Github
             </a>
           </li>
