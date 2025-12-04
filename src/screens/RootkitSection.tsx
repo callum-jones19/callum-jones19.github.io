@@ -6,13 +6,13 @@ export default function RootkitSection() {
       <div>
         <a
           href="https://github.com/callum-jones19/COMP6841_SA"
-          className="font-bold text-2xl underline flex items-center gap-1 sticky top-0 bg-white dark:bg-neutral-900 backdrop-blur-2xl pb-2"
+          className="font-bold text-2xl underline flex items-center gap-1 sticky top-0 dark:bg-neutral-900 backdrop-blur-2xl pb-2"
         >
           FreeBSD Rootkit
           <ExternalLink className="text-" />
         </a>
         <p>
-          A FreeBSD rootkit written in <span className="text-amber-400 font-bold">C</span>.
+          A FreeBSD rootkit written in <span className="text-red-400 font-bold">C</span>.
           This repository contains my extensive writeup of the entire process. This
           was a university project where the focus was on consistent documentation
           of the research process, detailing how you got from the beginning of

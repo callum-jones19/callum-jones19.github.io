@@ -13,7 +13,7 @@ export default function LeadlightSection() {
         </a>
         <p className="">
           Leadlight is a suite of digital signal processing algorithms written in
-          Rust that can
+          <span className="text-red-400 font-bold"> Rust</span> that can
           be loaded into DAWs compatible with the VST3 or CLAP plugin interfaces.
           It derives it algorihtms from <i>Airwindows</i>, an existing suite
           of VST2 DSP plugins written in C++. It aims to be highly performant,

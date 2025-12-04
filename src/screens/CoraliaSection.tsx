@@ -13,8 +13,8 @@ export default function CoraliaSection() {
         </a>
         <p className="">
           Coralia is a cross-platform, local music player. It is powered by
-          a <span className="text-amber-400 font-bold">Rust</span> backend that is controlled
-          via a <span className="text-amber-400 font-bold">Typescript</span> frontend. The frontend stays in sync with the backend
+          a <span className="text-red-400 font-bold">Rust</span> backend that is controlled
+          via a <span className="text-red-400 font-bold">Typescript</span> frontend. The frontend stays in sync with the backend
           state via a series of event listeners and queries.
         </p>
         <p className="mt-2">
