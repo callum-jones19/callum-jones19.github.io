@@ -224,14 +224,14 @@ will be modified.</p>
 will extend the current selection, instead of just moving the cursor.
 <code>Esc</code> will exit back to <code>NOR</code> mode, but will keep the selection highlighted.</p>
 <p>To remove the current selection, press <code>;</code>.</p>
-<p>Certain movement commands will also highlight the content contained within the
-motion. This will be discussed more in TODO.</p>
+<p>Certain movement will also highlight the content contained within the
+motion. For example, see <a href="./movements.html#word-based-movement">Movements</a>.</p>
 <h2 id="deletion"><a class="header" href="#deletion">Deletion</a></h2>
 <p>To delete the characters under the cursor, press the <code>d</code> key. If the current
 selection is greater than a single character, all characters in the selection
 will be deleted.</p>
 <p>The deleted section will be saved to Helix's default clipboard. This is more commonly
-known as the default <em>register</em>. These are discussed in more detail at TODO.</p>
+known as the default <em>register</em>. Registers are disussed in detail in the <a href="./registers.html">Registers</a> chapter.</p>
 <h2 id="pasting-and-copying-text"><a class="header" href="#pasting-and-copying-text">Pasting and Copying Text</a></h2>
 <p>As deleted text is stored inside the default register, this means we can paste
 the content back into the buffer. To do this, in <code>NOR</code> mode press <code>p</code>, which
