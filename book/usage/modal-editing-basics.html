@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="en" class="colibri sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modal Editing Basics</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "colibri" : "colibri";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('colibri')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="colibri">Colibri</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/helix-editor/helix" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/helix-editor/helix/edit/master/book/src/usage/modal-editing-basics.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="editor-basics"><a class="header" href="#editor-basics">Editor Basics</a></h1>
+<h2 id="entering-helix"><a class="header" href="#entering-helix">Entering Helix</a></h2>
+<p>Start Helix by running <code>hx</code>. This will open the editor with an empty buffer.
+A file can be opened directly in Helix from the command line with <code>hx {filename}</code>.</p>
+<h2 id="modal-editing"><a class="header" href="#modal-editing">Modal Editing</a></h2>
+<p>Helix is a modal editor, meaning it has different modes for different tasks.
+The main modes are:</p>
+<ul>
+<li><strong>Normal</strong> (<code>NOR</code>) mode: For navigation and editing commands. This is the default mode.</li>
+<li><strong>Insert</strong> (<code>INS</code>) mode: For typing text directly into the document. Access by typing <code>i</code>
+in normal mode.</li>
+<li><strong>Select</strong>/extend (<code>SEL</code>) mode: For making selections and performing operations on them.
+Access by typing <code>v</code> in normal mode.</li>
+</ul>
+<p>The bottom row of the editor is called the <code>statusline</code>. It can contain a
+variety of information relevant to the current editor instance. In the bottom
+left of the statusline, there will be a segment saying <code>NOR</code>. This indicates
+that the current mode of the editor is <em>Normal mode</em>.</p>
+<p>In Normal mode, typing letters will not insert them as text, but rather will
+execute specific <em>commands</em>. These commands will be explored more later. To
+insert text, press <code>i</code>, which will switch to insert mode. Now, text can be
+written directly into the buffer.</p>
+<p>To get back into <code>NOR</code> mode, press <code>esc</code>.</p>
+<blockquote>
+<p>💡 <em>TIP</em>: The <code>Esc</code> key is quite far away from the home row on most keyboards;
+many people remap <code>Caps Lock</code> to <code>Esc</code></p>
+</blockquote>
+<h2 id="basic-movement"><a class="header" href="#basic-movement">Basic movement</a></h2>
+<p>In <code>NOR</code> mode and <code>h</code>, <code>j</code>, <code>k</code> and <code>l</code> to move your cursor:</p>
+<ul>
+<li><code>h</code>: moves cursor 1 character to the left.</li>
+<li><code>j</code>: moves cursor 1 line below.</li>
+<li><code>k</code>: moves cursor 1 line above.</li>
+<li><code>l</code>: moves cursor 1 character to the right.</li>
+</ul>
+<p>The arrow keys can also be used to move, both in <code>NOR</code> mode and <code>INS</code> mode.
+This is <em>not</em> encouraged, however, as that involves a lot of movement between
+the arrow keys and the home row of the keyboard.</p>
+<p>This is the most basic way to navigate files and buffers in Helix, however it is
+not the most efficient or only way to do so. More movement methods are discussed
+in the following chapter.</p>
+<h2 id="command-mode--exiting-helix"><a class="header" href="#command-mode--exiting-helix">Command mode &amp; Exiting Helix</a></h2>
+<p>Command mode lets you send commands directly to the editor without relying
+on keybinds. To enter Command mode, press <code>:</code> while in <code>NOR</code> mode. To exit
+command mode without entering a command, press <code>Esc</code>.</p>
+<p>To exit Helix, type <code>q</code> or <code>quit</code> while in Command mode, and then press enter
+to confirm the command. This quite command will fail if there are unsaved changes
+to the file. To force quit and discard these changes, type <code>q!</code> or <code>quit!</code>.</p>
+<p>To open a file, type <code>e FILENAME</code>, <code>edit FILENAME</code>, <code>o FILENAME</code> or <code>open FILENAME</code>.</p>
+<p>To save a file, use the <code>w</code> or <code>write</code> command. This command can be executed
+on its own, or have a file path optionally provided as a parameter in order
+to save the file to that path.</p>
+<h2 id="selection-first-approach"><a class="header" href="#selection-first-approach">Selection-first Approach</a></h2>
+<p>Helix's philosophy is that each <strong>action</strong> (e.g., delete) will act on a <strong>selection</strong>.
+This means whatever you are going to act on (a word, paragraph, line, etc.) is
+selected first, and the action itself (delete, change, yank, etc) comes second.
+A <em>cursor</em> is just a single-width selection.</p>
+<p>Every time text is modified (an action), you will fully anticipate the result
+because you can clearly see the area of text which is highlighted, and thus
+will be modified.</p>
+<p>To enter <code>SEL</code> mode manually, you can press <code>v</code>. Motions done in this state
+will extend the current selection, instead of just moving the cursor.
+<code>Esc</code> will exit back to <code>NOR</code> mode, but will keep the selection highlighted.</p>
+<p>To remove the current selection, press <code>;</code>.</p>
+<p>Certain movement commands will also highlight the content contained within the
+motion. This will be discussed more in TODO.</p>
+<h2 id="deletion"><a class="header" href="#deletion">Deletion</a></h2>
+<p>To delete the characters under the cursor, press the <code>d</code> key. If the current
+selection is greater than a single character, all characters in the selection
+will be deleted.</p>
+<p>The deleted section will be saved to Helix's default clipboard. This is more commonly
+known as the default <em>register</em>. These are discussed in more detail at TODO.</p>
+<h2 id="pasting-and-copying-text"><a class="header" href="#pasting-and-copying-text">Pasting and Copying Text</a></h2>
+<p>As deleted text is stored inside the default register, this means we can paste
+the content back into the buffer. To do this, in <code>NOR</code> mode press <code>p</code>, which
+will paste the contents of the selection <em>after</em> the cursor. To paste text
+<em>before</em> the cursor, press <code>P</code>.</p>
+<p>To copy text into the register without deleting it, you can press <code>y</code>. This will
+<strong>y</strong>ank the contents of the current selection into the default register.</p>
+<p>To replace the current selection with the contents of the default register,
+you can press <code>R</code>.</p>
+<h2 id="undo-and-redo"><a class="header" href="#undo-and-redo">Undo and Redo</a></h2>
+<p>The <code>u</code> command will undo our most recent action.</p>
+<p>The <code>U</code> command will redo our most recent undo.</p>
+<h2 id="insertion-commands"><a class="header" href="#insertion-commands">Insertion Commands</a></h2>
+<p>There are a number of options available to enter <code>INS</code> mode, beyond just <code>i</code>.
+The most common of these are:</p>
+<ul>
+<li><code>i</code>: insert before the selection.</li>
+<li><code>a</code>: append after the selection.</li>
+<li><code>I</code>: insert at the start of the line.</li>
+<li><code>A</code>: append to the end of the line.</li>
+</ul>
+<p>You can also directly start inserting content on a newline:</p>
+<ul>
+<li><code>o</code>: adds a newline below the cursor and enters insert mode on it.</li>
+<li><code>O</code>: adds a newline above the cursor and enters insert mode on it.</li>
+</ul>
+<p>You can also delete the current selection and immediately enter into insert
+mode to replace it with <code>c</code> (change).</p>
+<h2 id="replace"><a class="header" href="#replace">Replace</a></h2>
+<p>Type <code>r&lt;character&gt;</code> to replace all selected characters with <code>&lt;ch&gt;</code>.</p>
+<h2 id="repetition"><a class="header" href="#repetition">Repetition</a></h2>
+<p>Type <code>.</code> to repeat the last <em>insert</em> command.</p>
+<p>Type <code>Alt</code> + <code>.</code> to repeat the last <code>f</code> / <code>t</code> movement.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../usage/usage.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../usage/movements.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../usage/usage.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../usage/movements.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

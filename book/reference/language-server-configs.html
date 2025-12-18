@@ -1,0 +1,1719 @@
+<!DOCTYPE HTML>
+<html lang="en" class="colibri sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Default Supported Language Servers</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "colibri" : "colibri";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('colibri')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="colibri">Colibri</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/helix-editor/helix" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/helix-editor/helix/edit/master/book/src/reference/language-server-configs.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="language-server-configurations"><a class="header" href="#language-server-configurations">Language server configurations</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Use <code>hx --health</code> to check the status of any of the language servers that are
+configured by default or in your personal <code>languages.toml</code> file. See
+<a href="https://docs.helix-editor.com/languages.html">the documentation</a> for more
+information about where these files are and how they work.</p>
+<p>For Helix to use a language server, it must first be installed onto your
+computer. If it is one of the default language servers, it will be used
+automatically with no further setup needed once it is installed.</p>
+<p>You can see the configuration of the default language servers for each language
+in the
+<a href="https://github.com/helix-editor/helix/blob/master/languages.toml">helix repo <code>languages.toml</code> file</a>.
+By adding the configurations below, you can supplement or replace the default
+configurations.</p>
+<p>Check if your operating system repository has them available, or install them
+manually, following the instructions below.</p>
+<p>If your language server does not support stdio, you can use <code>netcat</code> as a
+drop-in proxy, just add this to your <code>languages.toml</code>:</p>
+<pre><code class="language-toml">[language-server.example-language-server]
+command = "nc" 
+args = ["127.0.0.1", "6008"]
+
+[[language]]
+name = "example-language"
+language-servers = [ "example-language-server" ]
+</code></pre>
+<p>Much of this information was originally sourced from
+<a href="https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md">nvim-lspconfig</a>,
+<a href="https://github.com/emacs-lsp/lsp-mode/wiki/Install-Angular-Language-server">emacs-lspconfig</a>
+thanks to those authors!</p>
+<h1 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h1>
+<!--toc:start-->
+<ul>
+<li><a href="#languages">Languages</a>
+<ul>
+<li><a href="#angular">Angular</a></li>
+<li><a href="#ansible">Ansible</a></li>
+<li><a href="#astro">Astro</a></li>
+<li><a href="#awk">AWK</a></li>
+<li><a href="#bash">Bash</a></li>
+<li><a href="#bass">Bass</a></li>
+<li><a href="#bicep">Bicep</a></li>
+<li><a href="#bqn">BQN</a></li>
+<li><a href="#cc">C/C++</a></li>
+<li><a href="#clojure">Clojure</a></li>
+<li><a href="#cmake">CMake</a></li>
+<li><a href="#crystal">Crystal</a></li>
+<li><a href="#css">CSS</a></li>
+<li><a href="#c">C#</a></li>
+<li><a href="#d">D</a></li>
+<li><a href="#dart">Dart</a></li>
+<li><a href="#deno">Deno</a></li>
+<li><a href="#docker">Docker</a></li>
+<li><a href="#docker-compose">Docker Compose</a></li>
+<li><a href="#dot-graphviz">dot Graphviz</a></li>
+<li><a href="#elixir">Elixir</a></li>
+<li><a href="#elm">Elm</a></li>
+<li><a href="#forth">Forth</a></li>
+<li><a href="#fsharpf">FSharp/F#</a></li>
+<li><a href="#gdscript">GDScript</a></li>
+<li><a href="#github-actions">Github Actions</a></li>
+<li><a href="#gleam">Gleam</a></li>
+<li><a href="#glimmer">Glimmer</a></li>
+<li><a href="#glsl">GLSL</a></li>
+<li><a href="#go">Go</a></li>
+<li><a href="#graphql">GraphQL</a></li>
+<li><a href="#haskell">Haskell</a></li>
+<li><a href="#helm">Helm</a></li>
+<li><a href="#html">HTML</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#javascript">JavaScript</a></li>
+<li><a href="#json">JSON</a></li>
+<li><a href="#jsonnet">Jsonnet</a></li>
+<li><a href="#julia">Julia</a></li>
+<li><a href="#kotlin">Kotlin</a></li>
+<li><a href="#latex">LaTex</a></li>
+<li><a href="#lean-3">Lean 3</a></li>
+<li><a href="#lua">Lua</a></li>
+<li><a href="#markdoc">Markdoc</a></li>
+<li><a href="#markdown">Markdown</a></li>
+<li><a href="#matlab">MATLAB</a></li>
+<li><a href="#mint">Mint</a></li>
+<li><a href="#mojo">Mojo</a></li>
+<li><a href="#nim">Nim</a></li>
+<li><a href="#nix">Nix</a></li>
+<li><a href="#ocaml">OCaml</a></li>
+<li><a href="#odin">Odin</a></li>
+<li><a href="#openpolicyagent">OpenPolicyAgent</a></li>
+<li><a href="#perl">Perl</a></li>
+<li><a href="#pest">Pest</a></li>
+<li><a href="#php">PHP</a></li>
+<li><a href="#pkgbuild">PKGBUILD</a></li>
+<li><a href="#powershell">PowerShell</a></li>
+<li><a href="#prisma">Prisma</a></li>
+<li><a href="#prolog">Prolog</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#r">R</a></li>
+<li><a href="#racket">Racket</a></li>
+<li><a href="#rescript">ReScript</a></li>
+<li><a href="#rust">Rust</a></li>
+<li><a href="#scala">Scala</a></li>
+<li><a href="#scheme">Scheme</a></li>
+<li><a href="#scss">SCSS</a></li>
+<li><a href="#slint">Slint</a></li>
+<li><a href="#smithy">Smithy</a></li>
+<li><a href="#ruby">Ruby</a></li>
+<li><a href="#solc">solc</a></li>
+<li><a href="#svelte">Svelte</a></li>
+<li><a href="#swift">Swift</a></li>
+<li><a href="#sql">Sql</a></li>
+<li><a href="#tailwindcss">TailwindCSS</a></li>
+<li><a href="#terraform">Terraform</a></li>
+<li><a href="#toml">TOML</a></li>
+<li><a href="#typescript">TypeScript</a></li>
+<li><a href="#typespec">TypeSpec</a></li>
+<li><a href="#typst">Typst</a></li>
+<li><a href="#uiua">Uiua</a></li>
+<li><a href="#unison">Unison</a></li>
+<li><a href="#v">V</a></li>
+<li><a href="#vue">Vue</a></li>
+<li><a href="#wgsl">WGSL</a></li>
+<li><a href="#wikitext">Wikitext</a></li>
+<li><a href="#xml">XML</a></li>
+<li><a href="#yaml">YAML</a></li>
+<li><a href="#zig">Zig</a></li>
+</ul>
+</li>
+<li><a href="#other-language-server-protocol-types">Other Language Server Protocol Types</a>
+<ul>
+<li><a href="#harper-ls">Harper-ls</a></li>
+<li><a href="#vale-ls">Vale-ls</a></li>
+</ul>
+</li>
+</ul>
+<!--toc:end-->
+<h1 id="languages"><a class="header" href="#languages">Languages</a></h1>
+<h2 id="angular"><a class="header" href="#angular">Angular</a></h2>
+<p>https://github.com/angular/vscode-ng-language-service</p>
+<blockquote>
+<p>In this example we use <code>npm</code>, the exact same results can be achieved with <code>pnpm</code>, by replacing <code>npm</code> with <code>pnpm</code>.</p>
+</blockquote>
+<pre><code class="language-sh"># Install language-service(backend), typescript and language-server(vscode-ng-ls..) in one go. This provides all necessary dependencies:
+npm install -g @angular/language-service@next typescript @angular/language-server
+
+# Append this to your shell config (~/.bashrc, ~/.zshrc, etc.) to make it persistent
+echo 'export NODE_MODULES_GLOBAL="$(npm root -g)"' &gt;&gt; ~/.bashrc
+</code></pre>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[language-server.angular-ls]
+command = "ngserver"
+
+args = [
+  "--ngProbeLocations",
+  "${$NODE_MODULES_GLOBAL}",
+  "--tsProbeLocations",
+  "${$NODE_MODULES_GLOBAL}",
+  "--stdio",
+  # If this for some reason doesn't work, try replacing ${NODE_MODULES_GLOBAL} with the absolute paths, e.g. output of `npm root -g`
+]
+
+
+file-types = ["ts", "typescript", "html"]
+
+[[language]]
+name = "typescript"
+language-servers = ["angular-ls", "typescript-language-server"]
+
+[[language]]
+name = "html"
+language-servers = ["angular-ls", "vscode-html-language-server"]
+</code></pre>
+<p>To enable the latest Language Service features, set the <code>strictTemplates</code> option in <code>tsconfig.json</code> by setting strictTemplates to true, as shown in the following example:</p>
+<pre><code class="language-json">"angularCompilerOptions": {
+  "strictTemplates": true
+}
+</code></pre>
+<p>For more information, see https://angular.dev/tools/language-service.</p>
+<h2 id="ansible"><a class="header" href="#ansible">Ansible</a></h2>
+<p>If your OS package manager hasn't packaged
+<a href="https://ansible.readthedocs.io/projects/vscode-ansible/als/"><code>ansible-language-server</code></a>,
+you can install it from NPM:</p>
+<pre><code class="language-sh">npm i -g @ansible/ansible-language-server
+</code></pre>
+<p>In turn, this binary will check if <code>ansible-lint</code> and <code>yamllint</code> are installed
+on your system and use them if found.</p>
+<p>In addition to highlighting and linting your code, the Ansible language server
+can also be used to look up docs for Ansible keywords. With your cursor on a
+keyword, use "&lt;space&gt;k".</p>
+<h2 id="astro"><a class="header" href="#astro">Astro</a></h2>
+<p>https://github.com/withastro/language-tools/tree/main/packages/language-server</p>
+<pre><code class="language-sh">npm i -g @astrojs/language-server
+</code></pre>
+<p>Sample settings in <code>languages.toml</code></p>
+<pre><code class="language-toml">[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+config = {typescript = {tsdk = "/Users/user/.bun/install/global/node_modules/typescript/lib"}, environment = "node"}
+
+[[language]]
+name = "astro"
+auto-format = true
+language-servers = [ "astro-ls" ]
+</code></pre>
+<p>Please note that a valid <code>config.typescript.tsdk</code> path must be passed to the LSP
+config. You will need <code>typescript</code> installed. If you have <code>typescript</code> installed
+globally you can find where by running <code>npm list -g | head -1</code>.</p>
+<h2 id="awk"><a class="header" href="#awk">AWK</a></h2>
+<p>https://github.com/Beaglefoot/awk-language-server</p>
+<pre><code class="language-sh">npm i -g "awk-language-server@&gt;=0.5.2"
+</code></pre>
+<h2 id="bash"><a class="header" href="#bash">Bash</a></h2>
+<p>Language server for Bash, written using tree-sitter in TypeScript.</p>
+<p>https://github.com/mads-hartmann/bash-language-server</p>
+<p><code>bash-language-server</code> can be installed via <code>NPM</code>:</p>
+<pre><code class="language-sh">npm i -g bash-language-server
+</code></pre>
+<p>Note that <code>bash-language-server</code> has external dependencies for certain features!</p>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Binary</th></tr></thead><tbody>
+<tr><td>Diagnostics</td><td><code>shellcheck</code></td></tr>
+<tr><td>Formatting</td><td><code>shfmt</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="bass"><a class="header" href="#bass">Bass</a></h2>
+<p>https://github.com/vito/bass/releases/latest</p>
+<p>Bass's language server is built in to the <code>bass</code> command as <code>bass --lsp</code>. See
+the <a href="https://bass-lang.org/guide.html#getting-started">Guide</a> for more info.</p>
+<h2 id="bicep"><a class="header" href="#bicep">Bicep</a></h2>
+<p>https://github.com/Azure/bicep/releases/latest</p>
+<p>The Bicep language server is published separately as a Windows package. Download
+the bicep-langserver.zip from the releases page.</p>
+<p>To run this under Linux/WSL you will need to install the <code>dotnet</code> runtime
+<a href="https://learn.microsoft.com/en-nz/dotnet/core/install/linux?WT.mc_id=dotnet-35129-website">for your OS</a>.</p>
+<p>Unzip this in a directory of your choosing for example, <code>/home/myUser/.cache/</code>.
+Create the following bash script somewhere in your <code>$PATH</code>:</p>
+<p><code>/usr/local/bin/bicep-langserver</code></p>
+<pre><code class="language-shell">#!/usr/bin/env bash
+
+exec dotnet /home/myUser/.cache/bicep-langserver/Bicep.LangServer.dll
+</code></pre>
+<h2 id="bqn"><a class="header" href="#bqn">BQN</a></h2>
+<p>bqnlsp: https://git.sr.ht/~detegr/bqnlsp, which depends on:</p>
+<p><a href="https://github.com/Detegr/cbqn-sys">cbqn-sys</a> and
+<a href="https://github.com/Detegr/cbqn-rs">cbqn-rs</a></p>
+<p>Sample settings in <code>languages.toml</code></p>
+<pre><code class="language-toml">[language-server.bqnlsp]
+command = "bqnlsp"
+
+[[language]]
+name = "bqn"
+file-types = ["bqn"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+shebangs = ["bqn", "cbqn"]
+roots = []
+injection-regex = "bqn"
+scope = "scope.bqn"
+language-servers = ["bqnlsp"]
+language-id = "bqn"
+</code></pre>
+<p>Note: you can input the glyphs by
+<a href="https://docs.helix-editor.com/remapping.html">key remapping</a> in <code>config.toml</code>
+like:</p>
+<pre><code class="language-toml">[keys.insert."\\"]
+"=" = [ ":insert-output /bin/echo -n ×", "move_char_right" ]
+minus = [ ":insert-output /bin/echo -n ÷", "move_char_right" ]
+"+" = [ ":insert-output /bin/echo -n ⋆", "move_char_right" ]
+# ...
+</code></pre>
+<h2 id="cc"><a class="header" href="#cc">C/C++</a></h2>
+<p>https://clangd.llvm.org/installation.html</p>
+<p><strong>NOTE:</strong> Clang &gt;= 9 is recommended!</p>
+<p>clangd relies on a
+<a href="https://clang.llvm.org/docs/JSONCompilationDatabase.html">JSON compilation database</a>
+specified as <code>compile_commands.json</code> or, for simpler projects, a
+<code>compile_flags.txt</code>. For details on how to automatically generate one using
+CMake look
+<a href="https://cmake.org/cmake/help/latest/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">here</a>.
+Alternatively, you can use <a href="https://github.com/rizsotto/Bear">Bear</a>.</p>
+<h2 id="clojure"><a class="header" href="#clojure">Clojure</a></h2>
+<p>Please go to the installation page. https://clojure-lsp.io/installation/</p>
+<p>An example for MacOs/Linux (copied from the installation page)</p>
+<pre><code class="language-shell">brew remove clojure-lsp # if you have old clojure-lsp installed via brew
+brew install clojure-lsp/brew/clojure-lsp-native
+</code></pre>
+<h2 id="cmake"><a class="header" href="#cmake">CMake</a></h2>
+<p>CMake LSP Implementation.</p>
+<p>https://github.com/regen100/cmake-language-server</p>
+<h2 id="crystal"><a class="header" href="#crystal">Crystal</a></h2>
+<p>Core <code>languages.toml</code> contains configuration options, view at the top level of
+this repo.<br />
+Install the unofficial LSP server
+<a href="https://github.com/elbywan/crystalline">Crystalline</a>. Below is copied from the
+LSP repo.</p>
+<h5 id="linux-x86_64"><a class="header" href="#linux-x86_64">Linux (x86_64)</a></h5>
+<pre><code class="language-sh">wget https://github.com/elbywan/crystalline/releases/latest/download/crystalline_x86_64-unknown-linux-musl.gz -O crystalline.gz &amp;&amp;\
+gzip -d crystalline.gz &amp;&amp;\
+chmod u+x crystalline
+</code></pre>
+<h6 id="archlinux"><a class="header" href="#archlinux">ArchLinux</a></h6>
+<pre><code class="language-sh">yay -S crystalline
+</code></pre>
+<h5 id="macos"><a class="header" href="#macos">MacOS</a></h5>
+<p>Install using <a href="https://brew.sh">homebrew</a>:</p>
+<pre><code class="language-sh">brew install crystalline
+</code></pre>
+<h2 id="css"><a class="header" href="#css">CSS</a></h2>
+<p>https://github.com/hrsh7th/vscode-langservers-extracted</p>
+<p><code>vscode-css-language-server</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g vscode-langservers-extracted
+</code></pre>
+<h2 id="c"><a class="header" href="#c">C#</a></h2>
+<p>https://github.com/omnisharp/omnisharp-roslyn OmniSharp server based on Roslyn
+workspaces</p>
+<p><code>omnisharp-roslyn</code> can be installed by downloading and extracting a release for
+your platform from
+<a href="https://github.com/OmniSharp/omnisharp-roslyn/releases">here</a>.
+Be sure to use the "net6.0" version of Omnisharp - https://github.com/OmniSharp/omnisharp-roslyn/issues/2676.</p>
+<p>Omnisharp can also be built from source by following the instructions
+<a href="https://github.com/omnisharp/omnisharp-roslyn#downloading-omnisharp">here</a>.</p>
+<p>Omnisharp requires the <a href="https://dotnet.microsoft.com/download">dotnet-sdk</a> to be
+installed.</p>
+<h3 id="usage"><a class="header" href="#usage">Usage</a></h3>
+<h4 id="linux-and-windows"><a class="header" href="#linux-and-windows">Linux and Windows</a></h4>
+<p>To use Omnisharp, you only need to have the <code>OmniSharp</code> binary in your
+environment path. The default <code>languages.toml</code> configuration should work fine.</p>
+<h4 id="macos-1"><a class="header" href="#macos-1">macOS</a></h4>
+<p>Download the <code>-netX.0</code> build. Because OmniSharp is not shipped as a binary file,
+instead as <code>OmniSharp.dll</code>, it needs to be run using <code>dotnet</code>. As such the
+<code>languages.toml</code> config should be changed to this:</p>
+<pre><code class="language-toml">[language-server.omnisharp]
+command = "dotnet"
+args = [ "path/to/OmniSharp.dll", "--languageserver" ]
+</code></pre>
+<p>If the language server immediately exits or otherwise doesn't appear to work,
+try running <code>dotnet restore</code> and/or <code>dotnet build</code> in the current project
+directory.</p>
+<h2 id="d"><a class="header" href="#d">D</a></h2>
+<p>Serve-D.</p>
+<p>https://github.com/Pure-D/serve-d</p>
+<p>Install using <code>dub fetch serve-d</code></p>
+<h2 id="dart"><a class="header" href="#dart">Dart</a></h2>
+<p>Language server for dart.</p>
+<p>https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec</p>
+<h2 id="deno"><a class="header" href="#deno">Deno</a></h2>
+<p>Install Deno from https://docs.deno.com/runtime/getting_started/installation/</p>
+<p>Deno requires custom configuration in <code>languages.toml</code> see the <a href="https://docs.deno.com/runtime/getting_started/setup_your_environment/#helix">Helix environment setup section</a> for an up-to-date configuration.</p>
+<h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
+<p>https://github.com/rcjsuen/dockerfile-language-server-nodejs</p>
+<p><code>docker-langserver</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm install -g dockerfile-language-server-nodejs
+</code></pre>
+<h2 id="docker-compose"><a class="header" href="#docker-compose">Docker Compose</a></h2>
+<p>https://github.com/microsoft/compose-language-service</p>
+<p><code>docker-compose-langserver</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm install -g @microsoft/compose-language-service
+</code></pre>
+<h2 id="dot-graphviz"><a class="header" href="#dot-graphviz">dot Graphviz</a></h2>
+<p>https://github.com/nikeee/dot-language-server</p>
+<pre><code class="language-sh">npm i -g dot-language-server
+</code></pre>
+<h2 id="elixir"><a class="header" href="#elixir">Elixir</a></h2>
+<p>https://github.com/elixir-lsp/elixir-ls</p>
+<p><code>elixir-ls</code> can be installed by following the instructions
+<a href="https://github.com/elixir-lsp/elixir-ls#building-and-running">here</a>.</p>
+<pre><code class="language-bash">curl -fLO https://github.com/elixir-lsp/elixir-ls/releases/latest/download/elixir-ls.zip
+unzip elixir-ls.zip -d /path/to/elixir-ls
+# Unix
+chmod +x /path/to/elixir-ls/language_server.sh
+</code></pre>
+<p>Rename <code>language_server.sh</code> to <code>elixir-ls</code> and add it to your <code>$PATH</code> as this is
+how <code>helix</code> expects to find it.</p>
+<h5 id="macos-2"><a class="header" href="#macos-2">MacOS</a></h5>
+<p>Install using <a href="https://brew.sh">homebrew</a>:</p>
+<pre><code class="language-sh">brew install elixir-ls
+</code></pre>
+<h2 id="elm"><a class="header" href="#elm">Elm</a></h2>
+<p>https://github.com/elm-tooling/elm-language-server#installation</p>
+<pre><code class="language-sh">npm install -g elm elm-test elm-format @elm-tooling/elm-language-server
+</code></pre>
+<h2 id="forth"><a class="header" href="#forth">Forth</a></h2>
+<p>https://github.com/alexanderbrevig/forth-lsp#install</p>
+<pre><code class="language-sh">cargo install forth-lsp
+</code></pre>
+<h2 id="fsharpf"><a class="header" href="#fsharpf">FSharp/F#</a></h2>
+<p>https://github.com/fsharp/FsAutoComplete</p>
+<pre><code class="language-sh">dotnet tool install --global fsautocomplete
+</code></pre>
+<h2 id="gdscript"><a class="header" href="#gdscript">GDScript</a></h2>
+<p>We need to install <code>nc</code> or <code>netcat</code>. Port 6005 is used in Godot 4.0 beta6. You
+will find the right value in the editor configuration panel.</p>
+<pre><code class="language-toml">[language-server.godot]
+command = "nc" 
+args = [ "127.0.0.1", "6005"]
+
+[[language]]
+name = "gdscript"
+language-servers = [ "godot" ]
+</code></pre>
+<p><strong>For Windows 10/11</strong></p>
+<p>Use <code>winget</code> to install <code>nmap</code>. This will install <code>ncat</code>.</p>
+<pre><code class="language-powershell">winget install nmap
+</code></pre>
+<p>Once installed, make sure the folder that <code>nmap</code> is now located at is added to
+your PATH, as <code>winget</code> fails to do this automatically for some people.</p>
+<p>In Godot 3.5.1 port used is <code>6008</code>. You have to change the command used also.
+Instead of <code>nc</code> type <code>ncat</code> and modify the port. You can find the port when you
+open the Godot editor and navigate here:
+<code>Editor -&gt; Editor Settings -&gt; Network -&gt; Language Server -&gt; Remote Port</code>.</p>
+<pre><code class="language-toml">[language-server.godot]
+command = "ncat" 
+args = [ "127.0.0.1", "6008"]
+
+[[language]]
+name = "gdscript"
+language-servers = [ "godot" ]
+</code></pre>
+<h2 id="github-actions"><a class="header" href="#github-actions">Github Actions</a></h2>
+<p><code>npm install --global gh-actions-language-server</code></p>
+<pre><code class="language-toml">[language-server.gh-actions-language-server]
+command = 'gh-actions-language-server'
+args = ['--stdio']
+config = { sessionToken = ""}
+
+# GitHub Actions workflow language
+[[language]]
+name = "yaml"
+file-types = [{ glob = ".github/workflows/*.yml" }, { glob = ".github/workflows/*.yaml" }]
+language-servers = ["gh-actions-language-server"]
+roots = [".github", ".git"]
+</code></pre>
+<h2 id="gleam"><a class="header" href="#gleam">Gleam</a></h2>
+<p>Starting with version <code>0.21.0</code>, the Gleam language server is built-in to the
+<code>gleam</code> command-line interface.
+<a href="https://gleam.run/news/v0.21-introducing-the-gleam-language-server/">See the official announcement for more information.</a></p>
+<pre><code class="language-sh">gleam lsp
+</code></pre>
+<h2 id="glimmer"><a class="header" href="#glimmer">Glimmer</a></h2>
+<p>https://github.com/ember-tooling/ember-language-server</p>
+<p>Does not currently work with embroider-vite and .gjs/.gts files, only .hbs</p>
+<pre><code class="language-sh">install -g @ember-tooling/ember-language-server
+</code></pre>
+<pre><code class="language-toml">[[language]]
+name = "glimmer"
+language-servers = ["ember-language-server"]
+formatter = { command = "prettier", args = ["--parser", "glimmer"] }
+</code></pre>
+<h2 id="glsl"><a class="header" href="#glsl">GLSL</a></h2>
+<p>The default is <a href="https://github.com/nolanderc/glsl_analyzer"><code>glsl_analyzer</code></a></p>
+<h2 id="go"><a class="header" href="#go">Go</a></h2>
+<p>The folder for go packages (typically $HOME/go/bin) will need to be added to
+your PATH for any of the below to work.</p>
+<h3 id="install-tools"><a class="header" href="#install-tools">Install tools</a></h3>
+<pre><code>go install golang.org/x/tools/gopls@latest                               # LSP
+go install github.com/go-delve/delve/cmd/dlv@latest                      # Debugger
+go install golang.org/x/tools/cmd/goimports@latest                       # Formatter
+go install github.com/nametake/golangci-lint-langserver@latest           # Linter
+go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest # Linter cli
+</code></pre>
+<h3 id="autoformatting"><a class="header" href="#autoformatting">Autoformatting</a></h3>
+<p>The LSP formatter (<code>gofmt</code>) does not fix imports, <code>goimports</code> should be used
+instead.</p>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }
+</code></pre>
+<h2 id="graphql"><a class="header" href="#graphql">GraphQL</a></h2>
+<p>https://github.com/graphql/graphiql/blob/main/packages/graphql-language-service-cli/</p>
+<pre><code class="language-sh">npm i -g graphql-language-service-cli
+</code></pre>
+<h2 id="haskell"><a class="header" href="#haskell">Haskell</a></h2>
+<p>Haskell Language Server.</p>
+<p>https://github.com/haskell/haskell-language-server</p>
+<h2 id="helm"><a class="header" href="#helm">Helm</a></h2>
+<p>The Helm-ls installation guide can be found under the "Getting Started" section
+in the readme.</p>
+<p>https://github.com/mrjosh/helm-ls#getting-started</p>
+<h2 id="html"><a class="header" href="#html">HTML</a></h2>
+<h3 id="vscode-html-language-server"><a class="header" href="#vscode-html-language-server">vscode-html-language-server</a></h3>
+<p>https://github.com/hrsh7th/vscode-langservers-extracted</p>
+<p><code>vscode-html-language-server</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g vscode-langservers-extracted
+</code></pre>
+<h3 id="superhtml"><a class="header" href="#superhtml">superhtml</a></h3>
+<p>https://github.com/kristoff-it/superhtml</p>
+<ul>
+<li>Download from https://github.com/kristoff-it/superhtml/releases</li>
+<li>Extract the superhtml executable</li>
+<li>chmod +x superhtml</li>
+<li>add it to your $PATH</li>
+</ul>
+<pre><code class="language-toml">[[language]]
+name = "html"
+language-servers = [{ name = "superhtml", except-features = ["format"] }, "vscode-html-language-server"]
+auto-format = true
+</code></pre>
+<h2 id="java"><a class="header" href="#java">Java</a></h2>
+<p>https://github.com/eclipse/eclipse.jdt.ls</p>
+<p>Installation instructions can be found on the
+<a href="https://github.com/eclipse/eclipse.jdt.ls">projects README</a>.</p>
+<p>On macOS installation can also be done via <code>brew install jdtls</code>.</p>
+<p>On debian based distros try a fantastic install script made by
+<a href="https://github.com/eruizc-dev">eruizc-dev</a>:
+<a href="https://github.com/eruizc-dev/jdtls-launcher">jdtls-launcher</a>.</p>
+<p>For the Arch Linux: <code>yay -Sy jdtls</code>
+<a href="https://aur.archlinux.org/packages/jdtls">AUR jdtls source</a>.</p>
+<p>After installing, test to see if the <code>jdtls</code> works out of the box (it should
+work for the debian script). For versions older than <code>1.16.0</code>: the <code>-data</code>
+parameter must be passed to <code>jdtls</code> and it must be different for each project.
+This can be achieved by adding a <code>.helix/languages.toml</code> configuration to the
+project root:</p>
+<pre><code class="language-toml">[language-server]
+jdtls = { command = "jdtls" }
+language-server = { command = "jdtls", args = [
+  "-data", "/home/&lt;USER&gt;/.cache/jdtls/workspace"
+  ]}
+
+[[language]]
+name = "java"
+scope = "source.java"
+injection-regex = "java"
+file-types = ["java"]
+roots = ["pom.xml", "build.gradle", ]
+indent = { tab-width = 4, unit = "    " }
+language-servers = [ "jdtls" ]
+</code></pre>
+<p>Note: the <code>-data</code> parameter must be up one directory from the project directory.</p>
+<h3 id="inlay-hints"><a class="header" href="#inlay-hints">Inlay Hints</a></h3>
+<p>The following will enable inlay hints for the jdtls language server when added to <code>.helix/languages.toml</code></p>
+<pre><code class="language-toml">[language-server.jdtls.config.java.inlayHints]
+parameterNames.enabled = "all"
+</code></pre>
+<h2 id="javascript"><a class="header" href="#javascript">JavaScript</a></h2>
+<p>See
+<a href="https://github.com/helix-editor/helix/wiki/Language-Server-Configurations#typescript">tsserver</a>.</p>
+<h2 id="json"><a class="header" href="#json">JSON</a></h2>
+<p>https://github.com/hrsh7th/vscode-langservers-extracted</p>
+<p>vscode-json-language-server, a language server for JSON and JSON schema</p>
+<p><code>vscode-json-language-server</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g vscode-langservers-extracted
+</code></pre>
+<p>Available settings can be found here:
+https://github.com/microsoft/vscode/blob/4f69cdf95a12cef48d405b38bf7812a7f297c310/extensions/json-language-features/server/src/jsonServer.ts#L183</p>
+<p>Usage</p>
+<pre><code class="language-toml">config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
+</code></pre>
+<h2 id="jsonnet"><a class="header" href="#jsonnet">Jsonnet</a></h2>
+<p>https://github.com/grafana/jsonnet-language-server</p>
+<p>A <a href="https://langserver.org/">Language Server Protocol (LSP)</a> server for
+<a href="https://jsonnet.org/">Jsonnet</a>.</p>
+<p>Can be installed either via the
+<a href="https://github.com/grafana/jsonnet-language-server/releases">latest release binary</a>
+or if you have golang installed, you can use:</p>
+<pre><code class="language-sh">go install github.com/grafana/jsonnet-language-server@latest
+</code></pre>
+<h2 id="julia"><a class="header" href="#julia">Julia</a></h2>
+<p>https://github.com/julia-vscode/LanguageServer.jl</p>
+<p>LanguageServer.jl can be installed with <code>julia</code> and <code>Pkg</code>:</p>
+<pre><code class="language-sh">julia -e 'using Pkg; Pkg.add("LanguageServer")'
+</code></pre>
+<p>To update an existing install, use the following command:</p>
+<pre><code class="language-sh">julia -e 'using Pkg; Pkg.update()'
+</code></pre>
+<h2 id="kotlin"><a class="header" href="#kotlin">Kotlin</a></h2>
+<p>A Kotlin language server which was developed for internal usage and released
+afterward. Maintaining is not done by the original author, but by fwcd.</p>
+<p>It is built via gradle and developed on GitHub. Source and additional
+description: https://github.com/fwcd/kotlin-language-server</p>
+<h2 id="latex"><a class="header" href="#latex">LaTex</a></h2>
+<p><a href="https://github.com/latex-lsp/texlab">TexLab</a>: A cross-platform implementation
+of the
+<a href="https://microsoft.github.io/language-server-protocol">Language Server Protocol</a>
+providing rich cross-editing support for the
+<a href="https://www.latex-project.org/">LaTeX</a> typesetting system.</p>
+<p>Add the following to your languages.toml to enable build on save:</p>
+<pre><code class="language-toml">[language-server.texlab.config.texlab.build]
+onSave = true
+</code></pre>
+<p>TexLab can be further configured to jump to your current location in the pdf
+following the build, among other useful things. For all available options, see
+the <a href="https://github.com/latex-lsp/texlab/wiki/Configuration">TexLab wiki</a>.
+Everything under the <code>texlab</code> key goes under
+<code>language-server.texlab.config.texlab</code> (or possibly <code>language.config.texlab</code> on
+older releases). For instance, setting the <code>texlab.build.onSave</code> property to
+<code>true</code> (as per the
+<a href="https://github.com/latex-lsp/texlab/wiki/Configuration#texlabbuildonsave">TexLab wiki</a>)
+is achieved with the above <code>languages.toml</code>.</p>
+<h2 id="lean-3"><a class="header" href="#lean-3">Lean 3</a></h2>
+<p>https://github.com/leanprover/lean-client-js/tree/master/lean-language-server</p>
+<p>Lean installation instructions can be found
+<a href="https://leanprover-community.github.io/get_started.html#regular-install">here</a>.</p>
+<p>Once Lean is installed, you can install the Lean 3 language server by running</p>
+<pre><code class="language-sh">npm install -g lean-language-server
+</code></pre>
+<h2 id="lua"><a class="header" href="#lua">Lua</a></h2>
+<p>Binaries are available from:
+https://github.com/LuaLS/lua-language-server/releases</p>
+<p><code>mac</code></p>
+<pre><code class="language-sh">brew install lua-language-server
+</code></pre>
+<h2 id="markdoc"><a class="header" href="#markdoc">Markdoc</a></h2>
+<p><a href="https://www.npmjs.com/package/@markdoc/language-server">@markdoc/language-server</a> -
+an experimental language server for markdoc. <code>markdoc-ls</code> should be available
+after installation.</p>
+<p>Install using</p>
+<pre><code class="language-sh">npm install -g @markdoc/language-server
+</code></pre>
+<h2 id="markdown"><a class="header" href="#markdown">Markdown</a></h2>
+<h3 id="marksman"><a class="header" href="#marksman">Marksman</a></h3>
+<p>The primary default language server is <a href="https://github.com/artempyanykh/marksman">Marksman</a></p>
+<p>Binaries are available from <a href="https://github.com/artempyanykh/marksman/releases">here</a></p>
+<p>macOS and Linux:</p>
+<pre><code class="language-sh">brew install marksman
+</code></pre>
+<p>or</p>
+<pre><code class="language-sh">yay -S marksman-bin
+</code></pre>
+<p>Windows:</p>
+<pre><code class="language-pwsh">scoop install marksman
+</code></pre>
+<h3 id="ltex-ls"><a class="header" href="#ltex-ls">ltex-ls</a></h3>
+<p>As an alternative you can use <code>ltex-ls</code> which provides grammar and spelling
+errors in markup documents: https://valentjn.github.io/ltex/</p>
+<pre><code class="language-toml">[[language]]
+name = "markdown"
+language-servers = [ "marksman", "ltex-ls" ]
+</code></pre>
+<p>Additional configuration settings can be added, for example to disable the
+profanity rules and add the word <code>builtin</code> to two dictionaries:</p>
+<pre><code class="language-toml">[language-server.ltex-ls.config]
+ltex.disabledRules = { "en-US" = ["PROFANITY"], "en-GB" = ["PROFANITY"] }
+ltex.dictionary = { "en-US" = ["builtin"], "en-GB" = ["builtin"] }
+</code></pre>
+<p>Currently,
+<a href="https://github.com/valentjn/ltex-ls/issues/231">the ability to add to your user dictionary while running Helix is not supported</a>,
+so adding words to the config is the best workaround.</p>
+<blockquote>
+<p>[!important]
+<code>ltex-ls</code> has not been updated in a while, but there is a new fork with bug fixes and new features to try here: https://github.com/ltex-plus/ltex-ls-plus. If your build of Helix is before 16th Dec 24 you need to add:</p>
+<pre><code class="language-toml">[language-server]
+ltex-ls-plus = { command = "ltex-ls-plus" }
+</code></pre>
+</blockquote>
+<h3 id="markdown-oxide"><a class="header" href="#markdown-oxide"><code>markdown-oxide</code></a></h3>
+<p>An alternative to <code>marksman</code> that provides support for advanced markdown PKM
+systems in your favorite text editor. It features complete compatibility with
+Obsidian.md markdown syntax and bases its features on the features of the
+Obsidian.md editor. For a list of all features, check out the
+<a href="https://github.com/Feel-ix-343/markdown-oxide?tab=readme-ov-file#features">README</a></p>
+<ul>
+<li>It can be installed for Arch from the AUR under the name <code>markdown-oxide-git</code></li>
+</ul>
+<pre><code class="language-sh">paru -S markdown-oxide-git
+</code></pre>
+<ul>
+<li>Or it can be installed by <code>cargo</code></li>
+</ul>
+<pre><code class="language-sh">cargo install --git https://github.com/Feel-ix-343/markdown-oxide.git markdown-oxide
+</code></pre>
+<ul>
+<li>Or manually by following
+<a href="https://github.com/Feel-ix-343/markdown-oxide?tab=readme-ov-file#manual-for-macos-windows-and-other-linux-distributions">these directions</a></li>
+</ul>
+<h2 id="matlab"><a class="header" href="#matlab">MATLAB</a></h2>
+<p><a href="https://github.com/mathworks/MATLAB-language-server">matlab-language-server</a></p>
+<p>Note: as per the README, "MATLAB language server requires MATLAB version R2021a
+or later."</p>
+<pre><code class="language-toml">[language-server.matlab-ls]
+command = "matlab-language-server"
+args = ["--stdio"]
+
+[language-server.matlab-ls.config.MATLAB]
+indexWorkspace = false
+installPath = "/PATH/TO/MATLAB/INSTALLATION"
+matlabConnectionTiming = "onStart"
+telemetry = false
+
+[[language]]
+name = "matlab"
+scope = "source.m"
+file-types = ["m"]
+language-servers = ["matlab-ls"]
+comment-token = "%"
+shebangs = ["octave-cli", "matlab"]
+indent = { tab-width = 2, unit = "  " }
+</code></pre>
+<h2 id="mint"><a class="header" href="#mint">Mint</a></h2>
+<p>https://www.mint-lang.com</p>
+<p>Install Mint using the <a href="https://www.mint-lang.com/install">instructions</a>. The
+language server is included since version 0.12.0.</p>
+<h2 id="mojo"><a class="header" href="#mojo">Mojo</a></h2>
+<p>https://www.modular.com/mojo</p>
+<ul>
+<li>Install the Modular CLI</li>
+<li>Install the Mojo SDK</li>
+</ul>
+<p>See this PR: https://github.com/helix-editor/helix/pull/8583</p>
+<h2 id="nim"><a class="header" href="#nim">Nim</a></h2>
+<p>https://github.com/nim-lang/langserver</p>
+<pre><code class="language-sh"># May require choosenim
+nimble install nimlangserver
+</code></pre>
+<h2 id="nix"><a class="header" href="#nix">Nix</a></h2>
+<p>The default language server is <code>nil</code> since the 2022-12 release.</p>
+<p>https://github.com/oxalica/nil</p>
+<p>This program is available in <a href="https://github.com/NixOS/nixpkgs">NixOS/nixpkgs</a>
+under attribute <code>nil</code>, and is regularly updated.</p>
+<ul>
+<li>If you use <code>nix-env</code>, run <code>nix-env -iA nixpkgs.nil</code></li>
+<li>If you use <code>nix profile</code>, run <code>nix profile install nixpkgs#nil</code></li>
+<li>Check out the GitHub repository for additional options</li>
+</ul>
+<p>The formatter <code>nixpkgs-fmt</code> is not included and can be installed with
+<code>nix-env -iA nixpkgs.nixpkgs-fmt</code></p>
+<p>To set up the formatter, set the following in your <code>languages.toml</code> :</p>
+<pre><code class="language-toml">[[language]]
+name = "nix"
+formatter = { command = "nixpkgs-fmt" }
+</code></pre>
+<p>To use the previous default language server, check out
+https://github.com/nix-community/rnix-lsp</p>
+<h2 id="ocaml"><a class="header" href="#ocaml">OCaml</a></h2>
+<p>https://github.com/ocaml/ocaml-lsp</p>
+<p>The OCaml language server <code>ocamllsp</code> can be installed via OPAM:</p>
+<pre><code class="language-sh">opam install ocaml-lsp-server
+</code></pre>
+<h2 id="odin"><a class="header" href="#odin">Odin</a></h2>
+<p><a href="https://github.com/DanielGavin/ols">ols</a> - https://github.com/DanielGavin/ols</p>
+<p>Provides syntax highlighting, auto-complete, code formatting and more for Odin.</p>
+<h2 id="openpolicyagent"><a class="header" href="#openpolicyagent">OpenPolicyAgent</a></h2>
+<p>An implementation of the language server protocol for OpenPolicyAgent's rego.</p>
+<p>You can download it from its
+<a href="https://github.com/kitagry/regols/releases">releases page</a>, or</p>
+<pre><code class="language-sh">$ go install github.com/kitagry/regols@latest
+</code></pre>
+<h2 id="perl"><a class="header" href="#perl">Perl</a></h2>
+<p>https://github.com/bscan/PerlNavigator</p>
+<p>Provides syntax checking, autocompletion, perlcritic, code navigation, hover for
+Perl.</p>
+<p>Implemented as a Language Server using the Microsoft LSP libraries along with
+Perl doing the syntax checking and parsing.</p>
+<p>Perl Navigator can be installed by downloading the latest release for your
+platform at
+<a href="https://github.com/bscan/PerlNavigator/releases">the project's releases page</a>
+and putting the perlnavigator executable somewhere in your PATH.</p>
+<h2 id="pest"><a class="header" href="#pest">Pest</a></h2>
+<p>https://github.com/pest-parser/pest-ide-tools</p>
+<p>This repository contains an implementation of the Language Server Protocol in
+Rust, for the Pest parser generator.</p>
+<h2 id="php"><a class="header" href="#php">PHP</a></h2>
+<h3 id="phpactor"><a class="header" href="#phpactor">Phpactor</a></h3>
+<p>https://phpactor.readthedocs.io/en/master/index.html</p>
+<p>Phpactor requires PHP 8.1.</p>
+<p>You can download <code>phpactor.phar</code> as follows:</p>
+<pre><code class="language-sh">curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
+</code></pre>
+<p>Then make it executable and symlink it somewhere in your
+<a href="https://en.wikipedia.org/wiki/PATH_(variable)">PATH</a>:</p>
+<pre><code class="language-sh">chmod a+x phpactor.phar
+mv phpactor.phar ~/.local/bin/phpactor
+</code></pre>
+<p>Check support using the status command:</p>
+<pre><code class="language-sh">phpactor status
+✔ Composer detected - faster class location and more features!
+✔ Git detected - enables faster refactorings in your repository scope!
+</code></pre>
+<p>Then, to enable this LSP you have to create a file <code>languages.toml</code> in your
+project directory <code>.helix/languages.toml</code> and place the following code inside
+(or if you want you could do this to helix languages.toml file globally):</p>
+<pre><code class="language-toml">[language-server.phpactor]
+command = "phpactor"
+args = [ "language-server" ]
+[[language]]
+name = "php"
+language-servers = [ "phpactor" ]
+</code></pre>
+<h3 id="intelephense"><a class="header" href="#intelephense">Intelephense</a></h3>
+<blockquote>
+<p>[!WARNING]
+Intelephense is proprietary, so be sure to review its licensing terms.</p>
+</blockquote>
+<p>https://intelephense.com</p>
+<p><code>intelephense</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm install -g intelephense
+</code></pre>
+<h4 id="premium-version"><a class="header" href="#premium-version">Premium version</a></h4>
+<p>To enable the premium features you have to provide a license key for which you
+have a few options:</p>
+<ol>
+<li>Adding the license key directly to your languages.toml file:</li>
+</ol>
+<pre><code class="language-toml">[language-server.intelephense.config]
+licenceKey = "MY_LICENSE_KEY"
+</code></pre>
+<ol start="2">
+<li>Adding the path to your license file</li>
+</ol>
+<pre><code class="language-toml">[language-server.intelephense.config]
+licenceKey = "/home/username/.config/intelephense/license.txt"
+</code></pre>
+<ol start="3">
+<li>Adding the license file to your home directory under
+<code>$HOME/intelephense/licence.txt</code></li>
+</ol>
+<p><strong>Note</strong>: Keep in mind how the word is written licen<strong>c</strong>eKey and not
+licen<strong>s</strong>eKey, also for step 3) it has to be licen<strong>c</strong>e.txt.</p>
+<h2 id="pkgbuild"><a class="header" href="#pkgbuild">PKGBUILD</a></h2>
+<p>https://github.com/termux/termux-language-server</p>
+<h3 id="archlinux-1"><a class="header" href="#archlinux-1">Archlinux</a></h3>
+<pre><code class="language-bash">yay -S termux-language-server
+</code></pre>
+<h2 id="powershell"><a class="header" href="#powershell">PowerShell</a></h2>
+<p>A Language Server for Powershell is not present by default, but can be added with the following configuration.</p>
+<p>Download the latest
+<a href="https://github.com/PowerShell/PowerShellEditorServices/releases">PowerShellEditorServices</a>
+zip and extract it. In this example, I extracted it to C:\.
+You must then run <code>Get-ChildItem &lt;PowerShellEditorServices-Path&gt; -Recurse | Unblock-File</code> (in my case <code>Get-ChildItem C:\PowerShellEditorServices\ -Recurse | Unblock-File</code>) to remove the 'Mark of the Web' and allow PowerShellEditorServices to be executed.</p>
+<p>After PowerShellEditorServices is present, you can add this config to your languages.toml:</p>
+<pre><code class="language-toml">[[language]]
+name = 'powershell'
+scope = 'source.ps1'
+file-types = ['ps1', 'psm1']
+roots = ['.git']
+comment-token = '#'
+indent = { tab-width = 4, unit = '    ' }
+language-servers = [ 'powershell-editor-services' ]
+
+[language-server.powershell-editor-services]
+name = 'powershell-editor-services'
+transport = 'stdio'
+command = 'pwsh'
+args = ['-NoLogo', '-NoProfile', '-Command', 'C:\\PowerShellEditorServices\\PowerShellEditorServices\\Start-EditorServices.ps1 -SessionDetailsPath C:\\PowerShellEditorServices\\PowerShellEditorServices.sessions.lsp.json -LanguageServiceOnly -Stdio']
+</code></pre>
+<p>In combination with this LSP Config, you might want to use the DAP Config I wrote here: <a href="https://github.com/helix-editor/helix/wiki/Debugger-Configurations#powershell-powershelleditorservices">Debugger Configurations</a></p>
+<h2 id="prisma"><a class="header" href="#prisma">Prisma</a></h2>
+<p>https://github.com/prisma/language-tools/tree/main/packages/language-server</p>
+<p><code>prisma-language-server</code> can be installed via npm:</p>
+<pre><code class="language-sh">npm install -g @prisma/language-server
+</code></pre>
+<h2 id="prolog"><a class="header" href="#prolog">Prolog</a></h2>
+<p>An implementation of the language server protocol for SWI-Prolog</p>
+<p>https://github.com/jamesnvc/lsp_server</p>
+<p>Install the <code>swi-prolog</code> package and run <code>swipl</code>:</p>
+<pre><code>?- pack_install(lsp_server).
+</code></pre>
+<h2 id="python"><a class="header" href="#python">Python</a></h2>
+<h3 id="pylsp"><a class="header" href="#pylsp">pylsp</a></h3>
+<p><a href="https://github.com/python-lsp/python-lsp-server">python-lsp/python-lsp-server</a>
+(<code>pylsp</code>) is a fork of the python-language-server project (<code>pyls</code>), maintained
+by the Spyder IDE team and the community. It is a Python 3.7+ implementation of
+the
+<a href="https://github.com/Microsoft/language-server-protocol">Language Server Protocol</a>
+(versions &lt;1.4 should still work with Python 3.6).</p>
+<p>Installation instructions can be found in the
+<a href="https://github.com/python-lsp/python-lsp-server#installation">project's README</a>,
+but it consists of installing a package using <code>pip</code> (or
+<a href="https://github.com/pypa/pipx"><code>pipx</code></a>):</p>
+<pre><code class="language-console">pip install -U 'python-lsp-server[all]'
+</code></pre>
+<p>The <code>[all]</code> above refers to the optional providers supported. You can fine-tune
+what to install following the instructions
+<a href="https://github.com/python-lsp/python-lsp-server#installation">here</a>.</p>
+<h3 id="pylsp-mypy"><a class="header" href="#pylsp-mypy">pylsp-mypy</a></h3>
+<p><a href="https://github.com/python-lsp/pylsp-mypy">python-lsp/pylsp-mypy</a> (<code>pylsp-mypy</code>)
+is a Mypy (type checker) plugin for Pylsp. First do the steps in Pylsp section
+and then install pylsp-mypy:</p>
+<pre><code class="language-console">pip install pylsp-mypy
+</code></pre>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[[language]]
+name = "python"
+language-servers = ["pylsp"]
+
+[language-server.pylsp.config.pylsp]
+plugins.pylsp_mypy.enabled = true
+plugins.pylsp_mypy.live_mode = true
+</code></pre>
+<h3 id="pyrefly"><a class="header" href="#pyrefly">pyrefly</a></h3>
+<p>Pyrefly is a fast type checker for Python. It's designed to replace the existing Pyre type checker at Meta. Built in Rust and built for speed, Pyrefly aims to increase development velocity with IDE features and by checking your Python code.</p>
+<p>https://github.com/facebook/pyrefly</p>
+<p>The language server can be installed by running
+<code>pip install pyrefly</code></p>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[language-server.pyrefly]
+command = "pyrefly"
+args = [ "lsp" ]
+
+[[language]]
+name = "python"
+language-servers = [ "pyrefly" ]
+</code></pre>
+<h3 id="pyright"><a class="header" href="#pyright">pyright</a></h3>
+<p>Pyright is a fast type checker and language server from Microsoft, meant for
+large Python source bases. It is the LSP part of pylance (the VS Code python
+daemon).</p>
+<p>https://github.com/microsoft/pyright</p>
+<p>The language server can be installed by running
+<code>npm install --location=global pyright</code></p>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[[language]]
+name = "python"
+language-servers = [ "pyright" ]
+</code></pre>
+<h3 id="basedpyright"><a class="header" href="#basedpyright">basedpyright</a></h3>
+<p>Basedpyright is a fork of pyright with various type checking improvements,
+improved vscode support and pylance features built into the language server.</p>
+<p>https://docs.basedpyright.com</p>
+<p>The language server can be installed by running <code>pip install basedpyright</code></p>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[[language]]
+name = "python"
+language-servers = [ "basedpyright" ]
+</code></pre>
+<h3 id="ruff"><a class="header" href="#ruff">ruff</a></h3>
+<p><a href="https://github.com/charliermarsh/ruff">charliermarsh/ruff</a> is an extremely fast
+Python linter, written in Rust (see
+<a href="https://docs.astral.sh/ruff/installation/">installation instructions</a>).</p>
+<p>Ruff ships with a builtin LSP, see
+<a href="https://docs.astral.sh/ruff/editors/setup/#helix">ruff docs for integration with helix</a>.</p>
+<p>A suggested Helix configuration using ruff as lsp is given below:</p>
+<pre><code class="language-toml">[[language]]
+name = "python"
+language-servers = [ "ruff" ]
+auto-format = true
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+</code></pre>
+<p><strong>Note</strong> that ruff lacks basic features and is meant to be used alongside
+another LSP
+(<a href="https://github.com/helix-editor/helix/issues/5399#issuecomment-1373470899">helix-editor/helix#5399 (comment)</a>,
+<a href="https://github.com/charliermarsh/ruff-lsp/issues/23">charliermarsh/ruff-lsp#23</a>,
+<a href="https://github.com/charliermarsh/ruff-lsp/issues/23#issuecomment-1367903296">charliermarsh/ruff-lsp#23 (comment)</a>).</p>
+<p>As an alternative, <a href="#pylsp">pylsp</a> has support for ruff via a plugin.
+<a href="#python-lsp-ruff">See instructions for Helix here</a></p>
+<h3 id="python-lsp-ruff"><a class="header" href="#python-lsp-ruff">python-lsp-ruff</a></h3>
+<p>Refer to <a href="https://docs.astral.sh/ruff/configuration/">Ruff's documentation</a> and the <a href="https://github.com/python-lsp/python-lsp-ruff">python-lsp-ruff docs</a></p>
+<pre><code class="language-toml">[language-server.pylsp.config.pylsp.plugins.ruff]
+lineLength = 88
+preview = true
+select = ["E4", "E7", "E9", "F"] # Rules to be enabled by ruff
+ignore = ["D210"] # Rules to be ignored by ruff
+</code></pre>
+<h3 id="pyright--ruff"><a class="header" href="#pyright--ruff">pyright + ruff</a></h3>
+<p><a href="https://github.com/microsoft/pyright">pyright</a> - <code>npm install pyright -g</code></p>
+<p><a href="https://github.com/astral-sh/ruff-lsp">ruff-lsp</a> - <code>pip install ruff-lsp</code> or
+<a href="https://github.com/astral-sh/ruff">ruff</a> - <code>pip install ruff</code> (ruff-lsp is A
+<a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a>
+implementation for ruff, you can choose one)</p>
+<pre><code class="language-toml">[[language]]
+name = "python"
+language-servers = [ "pyright", "ruff" ]
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+# if you choose `ruff-lsp`
+[language-server.ruff]
+command = "ruff-lsp"
+[language-server.ruff.config.settings]
+args = ["--ignore", "E501"]
+# if you choose `ruff` itself
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+</code></pre>
+<h3 id="ruff--pyright--pylyzer"><a class="header" href="#ruff--pyright--pylyzer">ruff + pyright + pylyzer</a></h3>
+<ul>
+<li>
+<p><a href="https://github.com/astral-sh/ruff">ruff</a></p>
+</li>
+<li>
+<p><a href="https://github.com/microsoft/pyright">pyright</a></p>
+</li>
+<li>
+<p><a href="https://github.com/mtshiba/pylyzer">pylyzer</a></p>
+</li>
+</ul>
+<pre><code class="language-toml"># in languages.toml
+[[language]]
+name = "python"
+language-servers = ["pyright", "ruff", "pylyzer"]
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+[language-server.pylyzer]
+command = "pylyzer"
+args = ["--server"]
+</code></pre>
+<h2 id="r"><a class="header" href="#r">R</a></h2>
+<p>An implementation of the Language Server Protocol for R.</p>
+<p>https://github.com/REditorSupport/languageserver</p>
+<p>The language server can be installed by running
+<code>R -e 'install.packages("languageserver")'</code>.</p>
+<h2 id="racket"><a class="header" href="#racket">Racket</a></h2>
+<p><a href="https://github.com/jeapostrophe/racket-langserver">https://github.com/jeapostrophe/racket-langserver</a></p>
+<p>The Racket language server. This project seeks to use
+<a href="https://github.com/racket/drracket">DrRacket</a>'s public API to provide
+functionality that mimics DrRacket's code tools as closely as possible.</p>
+<p>Install via <code>raco</code>: <code>raco pkg install racket-langserver</code></p>
+<h2 id="rescript"><a class="header" href="#rescript">ReScript</a></h2>
+<p>https://github.com/rescript-lang/rescript-vscode</p>
+<p>// ReScript language server.</p>
+<h2 id="rust"><a class="header" href="#rust">Rust</a></h2>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer">rust-analyzer</a>, a language
+server for Rust.</p>
+<p>You can install rust-analyzer using <code>rustup</code> starting from Rust 1.64, and it
+will be added to your system's <code>$PATH</code>
+<a href="https://blog.rust-lang.org/2023/04/25/Rustup-1.26.0.html#whats-new-in-rustup-1260">starting from Rustup 1.26.0</a>:</p>
+<pre><code class="language-sh">rustup component add rust-analyzer
+</code></pre>
+<p>Add the following to your <code>languages.toml</code> to enable
+<a href="https://github.com/rust-lang/rust-clippy">clippy</a> on save:</p>
+<pre><code class="language-toml">[language-server.rust-analyzer.config.check]
+command = "clippy"
+</code></pre>
+<p>You may also wish to enable all features, as it will allow you to use rust-analyzer in <code>integration-test</code> for example.</p>
+<pre><code class="language-toml">[language-server.rust-analyzer.config.cargo]
+features = "all"
+</code></pre>
+<p>See <a href="https://rust-analyzer.github.io/manual.html">docs</a> for extra settings.
+Everything under the rust-analyzer key goes under
+<code>language-server.rust-analyzer.config</code> key in helix (for example,
+<code>rust-analyzer.check.command = "clippy"</code> is translated into the <code>language.toml</code>
+as above.)</p>
+<h2 id="scala"><a class="header" href="#scala">Scala</a></h2>
+<p>Scala language server with rich IDE features.</p>
+<p>https://scalameta.org/metals/</p>
+<ol>
+<li>Install <a href="https://get-coursier.io/">Coursier</a></li>
+<li>Run <code>coursier install metals</code></li>
+</ol>
+<h2 id="scheme"><a class="header" href="#scheme">Scheme</a></h2>
+<h3 id="steel-dialect"><a class="header" href="#steel-dialect">Steel Dialect</a></h3>
+<p>Steel's language server is available at
+<a href="https://github.com/mattwparas/steel/tree/master/crates/steel-language-server">github.com/mattwparas/crates/steel-language-server</a>.</p>
+<p>Recommended installation for LSP + interpreter
+(<a href="https://github.com/mattwparas/steel?tab=readme-ov-file#full-install">link</a>):</p>
+<pre><code class="language-sh">git clone git@github.com:mattwparas/steel.git
+cd steel
+cargo xtask install
+</code></pre>
+<p>Then follow the
+<a href="https://github.com/mattwparas/steel/tree/master/crates/steel-language-server#configuration">configuration</a>
+instructions.</p>
+<p>Finally, add the following to your language configuration file:</p>
+<pre><code class="language-toml">[[language]]
+name = "scheme"
+language-servers = ["steel-language-server"]
+
+[language-server.steel-language-server]
+command = "steel-language-server"
+args = []
+</code></pre>
+<h2 id="scss"><a class="header" href="#scss">SCSS</a></h2>
+<p>SCSS's language server is available from the vscode-langservers-extracted
+collection:</p>
+<p>https://github.com/hrsh7th/vscode-langservers-extracted</p>
+<p>You may install it by running:</p>
+<pre><code class="language-sh">npm i -g vscode-langservers-extracted
+</code></pre>
+<h2 id="slint"><a class="header" href="#slint">Slint</a></h2>
+<p><a href="https://github.com/slint-ui/slint/tree/HEAD/tools/lsp">https://github.com/slint-ui/slint/tree/HEAD/tools/lsp</a><br />
+<a href="https://slint-ui.com/">https://slint-ui.com/</a></p>
+<pre><code class="language-sh">cargo install slint-lsp
+</code></pre>
+<h2 id="smithy"><a class="header" href="#smithy">Smithy</a></h2>
+<p>For Smithy projects the following LSP is used:
+https://github.com/awslabs/smithy-language-server</p>
+<p><a href="https://get-coursier.io/">coursier</a> must be installed so that the language
+server can be launched. To install coursier please see their
+<a href="https://get-coursier.io/docs/cli-installation#native-launcher">installation instructions</a>.
+Since coursier will take care of everything else, no other steps are necessary!</p>
+<h2 id="ruby"><a class="header" href="#ruby">Ruby</a></h2>
+<h3 id="solargraph"><a class="header" href="#solargraph">Solargraph</a></h3>
+<p>https://solargraph.org/</p>
+<p>Solargraph, a language server for Ruby</p>
+<p>You can install Solargraph via gem install.</p>
+<pre><code class="language-sh">gem install --user-install solargraph
+</code></pre>
+<p>or</p>
+<h3 id="ruby-lsp"><a class="header" href="#ruby-lsp">Ruby-lsp</a></h3>
+<p>https://github.com/Shopify/ruby-lsp</p>
+<p>You can install ruby-lsp via gem install too.</p>
+<pre><code class="language-sh">gem install --user-install ruby-lsp
+</code></pre>
+<h2 id="solc"><a class="header" href="#solc">solc</a></h2>
+<p>solc is the native language server for the Solidity language.</p>
+<p>https://docs.soliditylang.org/en/latest/installing-solidity.html</p>
+<h2 id="svelte"><a class="header" href="#svelte">Svelte</a></h2>
+<p>https://github.com/sveltejs/language-tools/tree/master/packages/language-server</p>
+<p><code>svelte-language-server</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g svelte-language-server
+</code></pre>
+<p>For integration with <code>.js</code> and <code>.ts</code> files install <code>typescript-svelte-plugin</code>
+via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g typescript-svelte-plugin
+</code></pre>
+<p>Then for each svelte project update your <code>tsconfig.json</code>/<code>jsconfig.json</code> to add
+the <code>typescript-svelte-plugin</code></p>
+<pre><code class="language-json">{
+    "compilerOptions": {
+        ...
+        "plugins": [{
+            "name": "typescript-svelte-plugin"
+        }]
+    }
+}
+</code></pre>
+<p>Further information on <code>js</code> and <code>ts</code> integration for svelte can be found
+<a href="https://github.com/sveltejs/language-tools/tree/master/packages/typescript-plugin">here</a>.</p>
+<h2 id="swift"><a class="header" href="#swift">Swift</a></h2>
+<p>A language server for Swift, formatting provided via swift-format</p>
+<p>https://github.com/apple/sourcekit-lsp</p>
+<p>https://github.com/apple/swift-format</p>
+<p>Follow the
+<a href="https://github.com/apple/sourcekit-lsp#getting-started">Getting Started</a> guide
+to get sourcekit-lsp installed correctly for your OS. No additional
+configuration is needed, though note to use the same toolchain for both your
+installed LSP, and that you use to build.</p>
+<h2 id="sql"><a class="header" href="#sql">Sql</a></h2>
+<p>https://github.com/joe-re/sql-language-server</p>
+<pre><code class="language-sh">npm i -g sql-language-server
+</code></pre>
+<p><code>languages.toml</code> setting</p>
+<pre><code class="language-toml">[language-server.sql-language-server]
+command = "sql-language-server"
+args = ["up", "--method", "stdio"]
+
+[[language]]
+name = "sql"
+language-servers = [ "sql-language-server" ]
+</code></pre>
+<ul>
+<li>Note: There is also https://github.com/sqls-server/sqls written in Go</li>
+</ul>
+<h2 id="tailwindcss"><a class="header" href="#tailwindcss">TailwindCSS</a></h2>
+<p>https://github.com/tailwindlabs/tailwindcss-intellisense</p>
+<p><code>tailwindcss-language-server</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g @tailwindcss/language-server
+</code></pre>
+<p>Add this to your local <code>languages.toml</code> file to enable it</p>
+<p><code>languages.toml</code>:</p>
+<pre><code class="language-toml">[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "html"
+language-servers = [ "vscode-html-language-server", "tailwindcss-ls" ]
+
+[[language]]
+name = "css"
+language-servers = [ "vscode-css-language-server", "tailwindcss-ls" ]
+
+[[language]]
+name = "jsx"
+language-servers = [ "typescript-language-server", "tailwindcss-ls" ]
+
+[[language]]
+name = "tsx"
+language-servers = [ "typescript-language-server", "tailwindcss-ls" ]
+
+[[language]]
+name = "svelte"
+language-servers = [ "svelteserver", "tailwindcss-ls" ]
+</code></pre>
+<p>If you want to use TailwindCSS language server with other languages, configure
+like example below. The example is with rust.</p>
+<pre><code class="language-toml">[[language]]
+name = "rust"
+language-servers = ["rust-analyzer", "tailwindcss-ls"]
+
+[language-server.tailwindcss-ls]
+config = { userLanguages = { rust = "html", "*.rs" = "html" } }
+</code></pre>
+<h2 id="terraform"><a class="header" href="#terraform">Terraform</a></h2>
+<p>You'll need <code>terraform-ls</code> installed; the instructions are
+<a href="https://github.com/hashicorp/terraform-ls/blob/main/docs/installation.md">here</a>.</p>
+<p>Add this to your local languages.toml file to enable it</p>
+<p><code>languages.toml</code>:</p>
+<pre><code class="language-toml">[[language]]
+name = "hcl"
+language-servers = [ "terraform-ls" ]
+language-id = "terraform"
+
+[[language]]
+name = "tfvars"
+language-servers = [ "terraform-ls" ]
+language-id = "terraform-vars"
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
+# config.indexing.ignorePaths = ["ignore.hcl"]
+</code></pre>
+<h2 id="toml"><a class="header" href="#toml">TOML</a></h2>
+<p>https://taplo.tamasfe.dev/</p>
+<p>To configure as your main formatter, <a href="https://github.com/helix-editor/helix/wiki/Formatter-Configurations#taplo">read this</a>.</p>
+<p>The NPM versions and default builds of taplo does not contain the language server at this time. The
+<code>full</code> version (with the language server) can be installed with:</p>
+<h5 id="binary-releases"><a class="header" href="#binary-releases">Binary Releases</a></h5>
+<p><a href="https://github.com/tamasfe/taplo/releases">taplo releases</a></p>
+<h5 id="cargo"><a class="header" href="#cargo">Cargo</a></h5>
+<pre><code class="language-sh">cargo install taplo-cli --locked --features lsp
+</code></pre>
+<h5 id="macos-3"><a class="header" href="#macos-3">MacOS</a></h5>
+<pre><code class="language-sh">brew install taplo
+</code></pre>
+<h5 id="docker-1"><a class="header" href="#docker-1">Docker</a></h5>
+<pre><code class="language-sh">docker run tamasfe/taplo --help
+</code></pre>
+<h3 id="etc"><a class="header" href="#etc">etc</a></h3>
+<p><code>languages.toml</code>:</p>
+<pre><code class="language-toml">[[language]]
+name = "toml"
+# https://github.com/tamasfe/taplo/issues/580#issuecomment-2004174721
+roots = ["."]
+language-servers = ["taplo"]
+</code></pre>
+<blockquote>
+<p>[!NOTE]
+To avoid potential issues with <code>roots</code>, that config doesn't include <code>tombi</code>.
+Since <a href="https://github.com/helix-editor/helix/blob/ab97585b69f11b159a447c85dfd528cc241cf1e3/languages.toml#L349">tombi is a default LSP</a>, that will disable it.</p>
+</blockquote>
+<p>Run <code>taplo lsp --help</code> for more info.</p>
+<h2 id="typescript"><a class="header" href="#typescript">TypeScript</a></h2>
+<h3 id="typescript-language-server"><a class="header" href="#typescript-language-server">typescript-language-server</a></h3>
+<p>https://github.com/typescript-language-server/typescript-language-server</p>
+<p><code>typescript-language-server</code> depends on <code>typescript</code>. Both packages can be
+installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm install -g typescript typescript-language-server
+</code></pre>
+<p>To configure type language server, add a
+<a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html"><code>tsconfig.json</code></a>
+or <a href="https://code.visualstudio.com/docs/languages/jsconfig"><code>jsconfig.json</code></a> to
+the root of your project.</p>
+<p>Here's an example that disables type checking in JavaScript files.</p>
+<pre><code class="language-json">{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "checkJs": false
+  },
+  "exclude": ["node_modules"]
+}
+</code></pre>
+<h3 id="biome"><a class="header" href="#biome">Biome</a></h3>
+<p>Biome is a fast and efficient toolchain for web development that formats and
+lints code, supporting JavaScript, TypeScript, JSX, and JSON, with over 190
+rules and high compatibility with existing tools like Prettier.</p>
+<pre><code class="language-sh">npm install --save-dev --save-exact @biomejs/biome
+</code></pre>
+<p>Follow the official instructions on
+<a href="https://biomejs.dev/guides/editors/third-party-extensions/#helix">how to configure Biome for Helix</a>.</p>
+<blockquote>
+<p>[!important]
+The Biome CLI package doesn't ship with prebuilt binaries for Android yet. https://github.com/biomejs/biome/issues/1340</p>
+</blockquote>
+<h3 id="eslint"><a class="header" href="#eslint">ESLint</a></h3>
+<blockquote>
+<p>[!important]
+Version <code>@4.10</code> is broken for <code>hx</code>. You can:</p>
+<ul>
+<li><a href="https://github.com/hrsh7th/vscode-langservers-extracted/commit/859ca87fd778a862ee2c9f4c03017775208d033a#commitcomment-142613101">downgrade to <code>@4.8</code></a></li>
+<li>Await <a href="https://github.com/helix-editor/helix/pull/11315">this feature</a></li>
+</ul>
+</blockquote>
+<ol>
+<li>Install the LSP:</li>
+</ol>
+<pre><code class="language-sh"># Omitting version will default to major `@latest`!
+npm i -g vscode-langservers-extracted@4.8
+# `npm update -g` will install the latest non-major version,
+# only do that after the issue has been fixed!
+# Unfortunately, there's no proper way to pin/lock
+# global packs
+</code></pre>
+<ol start="2">
+<li>Add this to your <code>languages.toml</code>:</li>
+</ol>
+<pre><code class="language-toml">[[language]]
+name = "javascript"
+language-servers = [
+  "typescript-language-server", # optional
+  "vscode-eslint-language-server",
+]
+[[language]]
+name = "jsx"
+language-servers = [
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+
+[[language]]
+name = "typescript"
+language-servers = [
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+[[language]]
+name = "tsx"
+language-servers = [
+  "typescript-language-server",
+  "vscode-eslint-language-server",
+]
+</code></pre>
+<ol start="3">
+<li><a href="https://eslint.org/docs/latest/use/getting-started">Install ESL</a></li>
+</ol>
+<h2 id="typespec"><a class="header" href="#typespec">TypeSpec</a></h2>
+<p><a href="https://github.com/microsoft/typespec">https://github.com/microsoft/typespec</a></p>
+<p>The language server is installed along with the compiler using <code>npm</code>:</p>
+<pre><code class="language-sh">npm install -g @typespec/compiler
+</code></pre>
+<h2 id="typst"><a class="header" href="#typst">Typst</a></h2>
+<p><a href="https://github.com/uben0/tree-sitter-typst/">https://github.com/uben0/tree-sitter-typst/</a></p>
+<pre><code class="language-sh">cargo install --git https://github.com/nvarner/typst-lsp typst-lsp
+</code></pre>
+<h2 id="uiua"><a class="header" href="#uiua">Uiua</a></h2>
+<ul>
+<li>language: https://www.uiua.org</li>
+<li>lsp: https://github.com/uiua-lang/uiua?tab=readme-ov-file#language-server</li>
+<li>tree-sitter: https://github.com/shnarazk/tree-sitter-uiua</li>
+</ul>
+<pre><code class="language-toml">[language-server.uiua-lsp]
+command = "uiua"
+args = ["lsp"]
+
+[[language]]
+name = "uiua"
+scope = "source.uiua"
+injection-regex = "uiua"
+file-types = ["ua"]
+roots = []
+auto-format = true
+comment-token = "#"
+language-servers = [ "uiua-lsp" ]
+indent = { tab-width = 2, unit = "  " }
+shebangs = ["uiua"]
+auto-pairs = {'(' = ')', '{' = '}', '[' = ']', '"' = '"'}
+</code></pre>
+<h2 id="unison"><a class="header" href="#unison">Unison</a></h2>
+<p>Unison language server.</p>
+<p>More info:
+https://github.com/unisonweb/unison/blob/trunk/docs/language-server.markdown</p>
+<p>Requirements:</p>
+<ul>
+<li><code>ucm</code> started</li>
+<li><code>ncat</code>, <code>nc</code> or <code>netcat</code></li>
+</ul>
+<p>To <code>~/.config/helix/languages.toml</code> append this code:</p>
+<pre><code class="language-toml">[language-server.ucm]
+command = "ncat"
+args = ["localhost", "5757"]
+
+[[language]]
+name = "unison"
+language-servers = [ "ucm" ]
+</code></pre>
+<h2 id="v"><a class="header" href="#v">V</a></h2>
+<p>https://github.com/vlang/v-analyzer</p>
+<p>Clone, install and build:</p>
+<pre><code class="language-sh">git clone --filter=blob:none --recursive --shallow-submodules https://github.com/vlang/v-analyzer
+cd v-analyzer
+v build.vsh release
+</code></pre>
+<p>or use the installer, and follow the instructions that it will print:
+<code>v -e "$(curl -fsSL https://raw.githubusercontent.com/vlang/v-analyzer/main/install.vsh)"</code></p>
+<p>config path:</p>
+<p>set the v-analyzer to environment variable:</p>
+<pre><code class="language-shell">PATH=your/path/v-analyzer/bin:$PATH
+</code></pre>
+<h2 id="vue"><a class="header" href="#vue">Vue</a></h2>
+<p>https://github.com/vuejs/language-tools/tree/master/packages/language-server</p>
+<p>The Vue language server <code>vue-language-server</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g @vue/language-server
+</code></pre>
+<p>If you're using typescript, you'll also need the vue typescript plugin:</p>
+<pre><code class="language-sh">npm i -g @vue/typescript-plugin
+</code></pre>
+<p>To autoformat your <code>.vue</code> files upon save, you can first install <code>prettier</code> via
+<code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g prettier
+</code></pre>
+<p>And then add this to your <code>languages.toml</code> file in your Helix configuration
+directory:</p>
+<pre><code class="language-toml">[[language]]
+name = "vue"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "vue"] }
+language-servers = ["typescript-language-server"]
+
+[[language-server.typescript-language-server.config.plugins]]
+name = "@vue/typescript-plugin"
+location = "/full/path/to/node_modules/@vue/typescript-plugin"
+languages = ["vue"]
+</code></pre>
+<h2 id="wgsl"><a class="header" href="#wgsl">WGSL</a></h2>
+<p>https://github.com/wgsl-analyzer/wgsl-analyzer</p>
+<p><code>wgsl-analyzer</code> can be installed via <code>cargo</code>:</p>
+<pre><code class="language-sh">cargo install --git https://github.com/wgsl-analyzer/wgsl-analyzer wgsl-analyzer
+</code></pre>
+<h2 id="wikitext"><a class="header" href="#wikitext">Wikitext</a></h2>
+<p>https://github.com/bhsd-harry/vscode-extension-wikiparser</p>
+<p><code>wikitext-lsp</code> can be installed via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g wikitext-lsp
+</code></pre>
+<h2 id="xml"><a class="header" href="#xml">XML</a></h2>
+<p>https://github.com/redhat-developer/vscode-xml</p>
+<p>wget
+https://github.com/redhat-developer/vscode-xml/releases/download/0.27.1/lemminx-linux.zip</p>
+<ol>
+<li>Download lemminx-linux.zip</li>
+<li>Extract and copy lemminx-linux binary to location in $PATH</li>
+<li>Install xmllint via package manger yay, dnf, pacman apt-get etc (rpm: dnf
+install libxml2)</li>
+</ol>
+<p>Configuration:</p>
+<pre><code>[[language]]
+name = "xml"
+file-types = [ "xml", "svg", "xsd", "xslt", "xsl" ]
+auto-format = true
+formatter = { command = "xmllint", args = ["--format", "-"] }
+language-servers = [ "xml" ]
+
+[language-server.xml]
+command = "lemminx-linux"
+</code></pre>
+<h2 id="yaml"><a class="header" href="#yaml">YAML</a></h2>
+<p>https://github.com/redhat-developer/yaml-language-server</p>
+<p><code>yaml-language-server</code> can be installed via <code>brew</code> on Mac:</p>
+<pre><code class="language-sh">brew install yaml-language-server
+</code></pre>
+<p>or via <code>npm</code>:</p>
+<pre><code class="language-sh">npm i -g yaml-language-server@next
+</code></pre>
+<p>Example configuration using json schemas.</p>
+<pre><code class="language-toml">[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true
+
+[language-server.yaml-language-server.config.yaml.schemas]
+"https://json.schemastore.org/github-workflow.json" = ".github/workflows/*.{yml,yaml}"
+"https://raw.githubusercontent.com/ansible-community/schemas/main/f/ansible-tasks.json" = "roles/{tasks,handlers}/*.{yml,yaml}"
+</code></pre>
+<h2 id="zig"><a class="header" href="#zig">Zig</a></h2>
+<p>Zig LSP implementation + Zig Language Server.</p>
+<p>https://github.com/zigtools/zls</p>
+<h1 id="other-language-server-protocol-types"><a class="header" href="#other-language-server-protocol-types">Other Language Server Protocol Types</a></h1>
+<p>Non language-specific Language Server Protocols, non-coding LSPs, and others.</p>
+<h2 id="harper-ls"><a class="header" href="#harper-ls">Harper-ls</a></h2>
+<p><a href="https://github.com/elijah-potter/harper/">Harper</a> is an English grammar and
+spelling checker for comments and text.<br />
+Installing:</p>
+<pre><code class="language-sh">cargo install harper-ls --locked
+</code></pre>
+<p>Harper will need to be manually added to each language you'd like check's
+language server list.<br />
+Usage:</p>
+<pre><code class="language-TOML">[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+</code></pre>
+<p>Disabling specific
+<a href="https://writewithharper.com/docs/rules">rules</a>.</p>
+<pre><code class="language-TOML">[language-server.harper-ls.config.harper-ls.linters]
+spaces = false
+</code></pre>
+<p>Change the default <code>diagnosticSeverity</code> from hint to warning:</p>
+<pre><code class="language-TOML">[language-server.harper-ls.config.harper-ls]
+diagnosticSeverity = "warning"
+</code></pre>
+<h2 id="vale-ls"><a class="header" href="#vale-ls">Vale-ls</a></h2>
+<p>Vale is a markup-aware linter for prose built with speed and extensibility in
+mind.</p>
+<p>https://github.com/errata-ai/vale</p>
+<div class="table-wrapper"><table><thead><tr><th>Tool</th><th>Extensible</th><th>Checks</th><th>Supports Markup</th><th>Built With</th><th>License</th></tr></thead><tbody>
+<tr><td>Vale</td><td>Yes (via YAML)</td><td>spelling, style</td><td>Yes (Markdown, AsciiDoc, reStructuredText, HTML, XML, Org)</td><td>Go</td><td>MIT</td></tr>
+</tbody></table>
+</div>
+<p>The Vale Language Server is an implementation of the Language Server Protocol
+for Vale.</p>
+<p>https://github.com/errata-ai/vale-ls</p>
+<p>Vale supports
+<a href="https://vale.sh/docs/topics/scoping/#code-1">linting source code comments in a number of languages</a></p>
+<p>You must install both <code>vale</code> and <code>vale-ls</code> into your <code>$PATH</code> and add it to each
+language you wish to lint, for example:</p>
+<p>Since https://github.com/helix-editor/helix/pull/11636/ you only need to add:</p>
+<pre><code class="language-toml">[[language]]
+name = "html"
+language-servers = [ "vscode-html-language-server", "vale-ls" ]
+</code></pre>
+<p>Before that PR:</p>
+<p><code>languages.toml</code></p>
+<pre><code class="language-toml">[language-server.vale-ls]
+command = "vale-ls"
+
+[[language]]
+name = "html"
+language-servers = [ "vscode-html-language-server", "vale-ls" ]
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../reference/lang-support.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../reference/terminal-support.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../reference/lang-support.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../reference/terminal-support.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
