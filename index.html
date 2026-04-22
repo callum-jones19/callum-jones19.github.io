@@ -2,11 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+		<link rel="stylesheet" href="./index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Callum Jones</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+		<div class="site-container">
+			<div class="left-container">
+				<a class="margin-button margin-button-current">
+					<img src="./assets/signpost.webp" class="current-page-sign"/>
+					Home
+				</a>
+				<a
+					class="margin-button"
+					href="./projects.html"
+				>
+					My Projects
+				</a>
+				<a class="margin-button" href="./about.html">About</a>
+			</div>
+			<div class="text-body topheader">
+				<h1 >Hi, I'm Callum!</h1>
+				<p>
+					This is where you can find various projects I've worked
+					on, random little blog posts, and other bits and pieces I find interesting
+					and would like to upload.
+				</p>
+				<p>
+				  For front-end development, I have a lot of fun working on interactive
+				  projects, like the mapping portals I've worked on, or the music player
+					I developed. I try to use a variety of tools, like Typescript/React/Tailwind
+					for some of the bigger projects, and basic HTML/CSS for simpler tasks (like
+					this website!)
+				</p>
+				<p>
+					I also find a lot of fun in back-end projects - for my thesis, I worked
+					on a set of audio processing plugins for DAWs like Reaper, which I coded
+					in Rust.
+				</p>
+				<p>This site was made without AI, for humans.</p>
+			</div>
+			<div class="right-container">
+			</div>
+		</div>
+		<footer>
+			<div class="footer-content">
+				<span>Callum Jones 2026</span>
+				<div class="footer-links">
+					<a href="https://mastodon.social/@etched">mastodon</a>
+					<a href="https://github.com/callum-jones19">github</a>
+				</div>
+			</div>
+		</footer>
   </body>
 </html>
